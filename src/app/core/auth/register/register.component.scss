@@ -1,0 +1,8 @@
+p-inputnumber,
+::ng-deep .p-inputnumber,
+::ng-deep .p-password {
+  display: block;
+  input {
+    width: 100%;
+  }
+}

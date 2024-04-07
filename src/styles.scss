@@ -6,3 +6,42 @@
 // primeng
 @import 'primeng/resources/themes/lara-light-blue/theme.css';
 @import 'primeng/resources/primeng.css';
+
+// Icons
+@import 'primeicons/primeicons.css';
+
+// Brand colors
+
+.primary {
+  color: #2e3531;
+}
+
+.secondary {
+  color: #ffffff;
+}
+
+.accent {
+  color: #4c9e6c;
+}
+
+// Brand Background colors
+
+.bg-primary {
+  background-color: #2e3531;
+}
+
+.bg-secondary {
+  background-color: #ffffff;
+}
+
+.bg-accent {
+  background-color: #4c9e6c;
+}
+
+.ng-dirty,
+.ng-invalid,
+.ng-dirty + label,
+.ng-invalid + label {
+  border-color: initial;
+  color: initial;
+}

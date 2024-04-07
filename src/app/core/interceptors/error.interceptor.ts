@@ -8,10 +8,14 @@ import {
 } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { AuthService } from '../auth.service';
+import { MessageService } from 'primeng/api';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private _authService: AuthService) {}
+  constructor(
+    private _authService: AuthService,
+    private messageService: MessageService,
+  ) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -23,6 +27,13 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (error instanceof HttpErrorResponse && error.status === 401) {
           this._authService.signOut();
         }
+
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erreur',
+          detail: error.message,
+          sticky: true,
+        });
 
         return throwError(() => error);
       }),

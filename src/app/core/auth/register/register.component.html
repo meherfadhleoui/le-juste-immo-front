@@ -1,0 +1,81 @@
+<div class="flex min-h-screen">
+  <div class="flex flex-col justify-center items-center w-full gap-8 p-10">
+    <div class="flex flex-col items-center justify-center gap-2">
+      <img src="assets/small-logo.png" alt="logo" class="h-9" />
+      <span class="max-w-80 text-center font-semibold text-lg"
+        >Créez un compte en sélectionnant le type de compte souhaité
+      </span>
+      <p-toggleButton
+        offLabel="Utilisateur"
+        offIcon="pi pi-user"
+        onLabel="Particulier"
+        onIcon="pi pi-building"
+        [style]="{ width: '10em' }"
+      ></p-toggleButton>
+    </div>
+
+    <span class="p-float-label w-4/5">
+      <input pInputText id="username" class="w-full" />
+      <label htmlFor="username">Nom d'utilisateur</label>
+    </span>
+
+    <span class="p-float-label w-4/5">
+      <input pInputText id="email" class="w-full" />
+      <label htmlFor="email">Adresse e-mail</label>
+    </span>
+
+    <span class="p-float-label w-4/5">
+      <input pInputText id="agencyName" class="w-full" />
+      <label htmlFor="agencyName">Nom de l'agence</label>
+    </span>
+
+    <span class="p-float-label w-4/5">
+      <input pInputText id="address" class="w-full" />
+      <label htmlFor="address">Adresse de l'agence</label>
+    </span>
+
+    <span class="p-float-label w-4/5">
+      <p-inputNumber inputId="phone" class="w-full"> </p-inputNumber>
+      <label htmlFor="phone">Téléphone</label>
+    </span>
+
+    <span class="p-float-label w-4/5">
+      <p-password
+        id="password"
+        class="w-full"
+        [toggleMask]="true"
+        [feedback]="false"
+      ></p-password>
+
+      <label htmlFor="password">Mot de passe</label>
+    </span>
+
+    <span class="p-float-label w-4/5">
+      <p-password
+        id="comfirmPassword"
+        class="w-full"
+        [toggleMask]="true"
+        [feedback]="false"
+      ></p-password>
+
+      <label htmlFor="comfirmPassword">Confirmer le mot de passe</label>
+    </span>
+
+    <button
+      pButton
+      pRipple
+      label="S'inscrire"
+      class="bg-accent w-4/5 font-thin"
+    ></button>
+
+    <div class="flex flex-col gap-2">
+      <span
+        >Déjà membre ?
+        <a class="primary font-bold" routerLink="/login">
+          Connectez-vous ici
+        </a>
+      </span>
+    </div>
+  </div>
+  <app-right-auth-panel class="max-h-screen w-full"></app-right-auth-panel>
+</div>
