@@ -1,5 +1,4 @@
 // tailwindcss
-
 @import 'tailwindcss/base' layer(tailwindcss);
 @import 'tailwindcss/components' layer(tailwindcss);
 @import 'tailwindcss/utilities' layer(tailwindcss);
@@ -15,7 +14,6 @@
 @import 'assets/styles/flag.css';
 
 // Brand colors
-
 .primary {
   color: #2e3531;
 }
@@ -29,7 +27,6 @@
 }
 
 // Brand Background colors
-
 .bg-primary {
   background-color: #2e3531;
 }

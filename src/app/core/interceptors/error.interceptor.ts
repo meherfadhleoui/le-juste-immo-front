@@ -49,7 +49,6 @@ export class ErrorInterceptor implements HttpInterceptor {
       severity: 'error',
       summary: 'Erreur',
       detail: error,
-      sticky: true,
     });
   }
 }

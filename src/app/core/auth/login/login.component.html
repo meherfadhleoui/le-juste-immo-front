@@ -2,7 +2,6 @@
   <form
     [formGroup]="loginForm"
     class="flex flex-col justify-center items-center w-full gap-8 p-10"
-    (ngSubmit)="submit()"
   >
     <div class="flex flex-col items-center justify-center gap-2">
       <img src="assets/small-logo.png" alt="logo" class="h-9" />
@@ -28,12 +27,13 @@
 
     <span class="w-full">
       <span class="p-float-label">
-        <input
-          pInputText
-          id="password"
+        <p-password
+          inputId="password"
           class="w-full"
+          [toggleMask]="true"
+          [feedback]="false"
           formControlName="password"
-        />
+        ></p-password>
         <label htmlFor="password">Mot de passe</label>
       </span>
       <control-error [control]="loginForm.get('password')" />
@@ -44,7 +44,9 @@
       pButton
       pRipple
       label="Connexion"
-      class="bg-accent w-4/5 font-thin"
+      class="bg-accent w-full font-thin"
+      [loading]="isLoading"
+      (click)="submit()"
     ></button>
 
     <div class="flex flex-col gap-2">
