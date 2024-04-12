@@ -1,8 +1,8 @@
 <div class="flex min-h-screen">
   <form
     [formGroup]="loginForm"
-    class="flex flex-col justify-center items-center w-full gap-8"
-    (ngSubmit)="click()"
+    class="flex flex-col justify-center items-center w-full gap-8 p-10"
+    (ngSubmit)="submit()"
   >
     <div class="flex flex-col items-center justify-center gap-2">
       <img src="assets/small-logo.png" alt="logo" class="h-9" />
@@ -10,25 +10,33 @@
         >Connectez-vous à votre compte
       </span>
     </div>
-    <span class="p-float-label w-4/5">
-      <input
-        pInputText
-        id="email"
-        type="email"
-        class="w-full"
-        formControlName="email"
-      />
-      <label htmlFor="email">Adresse e-mail</label>
+
+    <span class="w-full">
+      <span class="p-float-label">
+        <input
+          pInputText
+          id="email"
+          type="email"
+          class="w-full"
+          formControlName="email"
+        />
+        <label htmlFor="email">Adresse e-mail</label>
+      </span>
+
+      <control-error [control]="loginForm.get('email')" />
     </span>
 
-    <span class="p-float-label w-4/5">
-      <input
-        pInputText
-        id="password"
-        class="w-full"
-        formControlName="password"
-      />
-      <label htmlFor="password">Mot de passe</label>
+    <span class="w-full">
+      <span class="p-float-label">
+        <input
+          pInputText
+          id="password"
+          class="w-full"
+          formControlName="password"
+        />
+        <label htmlFor="password">Mot de passe</label>
+      </span>
+      <control-error [control]="loginForm.get('password')" />
     </span>
 
     <button

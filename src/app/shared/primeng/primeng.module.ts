@@ -5,6 +5,9 @@ import { ButtonModule } from 'primeng/button';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { PasswordModule } from 'primeng/password';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { FieldsetModule } from 'primeng/fieldset';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   exports: [
@@ -14,6 +17,9 @@ import { PasswordModule } from 'primeng/password';
     ToggleButtonModule,
     InputNumberModule,
     PasswordModule,
+    SelectButtonModule,
+    FieldsetModule,
+    DropdownModule,
   ],
 })
 export class PrimengModule {}

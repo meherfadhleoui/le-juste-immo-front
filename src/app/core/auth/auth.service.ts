@@ -7,7 +7,15 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   constructor(private httpClient: HttpClient) {}
 
-  signIn(user: any) {}
+  signIn() {}
 
   signOut() {}
+
+  register(registerFormValues: any) {
+    return this.httpClient.post('/register', registerFormValues);
+  }
+
+  verifyAccount(token: string) {
+    return this.httpClient.get(`/account_confirmation/${token}`);
+  }
 }

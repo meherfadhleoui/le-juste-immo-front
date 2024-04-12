@@ -17,10 +17,10 @@ export class RequestInterceptor implements HttpInterceptor {
     next: HttpHandler,
   ): Observable<HttpEvent<unknown>> {
     const cloneReq = request.clone({
-      headers: request.headers.set(
-        'Authorization',
-        'Bearer ' + 'this._authService.accessToken',
-      ),
+      // headers: request.headers.set(
+      //   'Authorization',
+      //   'Bearer ' + 'this._authService.accessToken',
+      // ),
 
       url: environment.api + request.url,
     });

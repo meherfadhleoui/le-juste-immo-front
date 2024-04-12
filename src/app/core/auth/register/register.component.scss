@@ -1,8 +1,27 @@
-p-inputnumber,
-::ng-deep .p-inputnumber,
-::ng-deep .p-password {
-  display: block;
-  input {
+:host {
+  p-inputnumber,
+  ::ng-deep .p-inputnumber,
+  ::ng-deep .p-password {
+    display: block;
+    input {
+      width: 100%;
+    }
+  }
+
+  form > * {
     width: 100%;
+    input {
+      width: 100%;
+    }
+  }
+
+  ::ng-deep .p-dropdown {
+    width: 100%;
+  }
+
+  ::ng-deep .p-selectbutton .p-button.p-highlight {
+    background: #4c9e6c;
+    border-color: #4c9e6c;
+    color: #ffffff;
   }
 }

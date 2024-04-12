@@ -16,7 +16,6 @@ import { RequestInterceptor } from './core/interceptors/request.interceptor';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule,
     HttpClientModule,
     ToastModule,
     BrowserAnimationsModule,

@@ -1,0 +1,32 @@
+<div
+  *ngIf="isLoading"
+  class="min-h-screen flex flex-col justify-center items-center"
+>
+  <img src="assets/animated-logo.gif" alt="logo" class="w-60 h-60" />
+
+  <span class="font-bold text-center text-xl primary"
+    >Votre compte est en cours de vérification <br />
+    Merci de votre patience</span
+  >
+</div>
+
+<div *ngIf="!isLoading" class="flex min-h-screen">
+  <div class="flex flex-col justify-center items-center w-full gap-4 p-20">
+    <span
+      class="font-semibold text-lg"
+      [ngClass]="isConfirmed ? 'accent' : 'p-error'"
+      >{{ header }}</span
+    >
+    <span class="primary text-md text-center">
+      {{ getMessage() }}
+    </span>
+    <span class="font-semibold mt-10">
+      Retour à la page de
+      <a class="accent font-bold cursor-pointer" routerLink="/login">
+        connexion</a
+      >
+    </span>
+  </div>
+
+  <app-right-auth-panel class="max-h-screen w-full"></app-right-auth-panel>
+</div>
