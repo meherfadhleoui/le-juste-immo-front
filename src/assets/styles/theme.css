@@ -7701,7 +7701,7 @@
 }
 @layer primeng {
   .p-button-label {
-    font-weight: 700;
+    font-weight: 500;
   }
 
   .p-accordion .p-accordion-header .p-accordion-header-link {

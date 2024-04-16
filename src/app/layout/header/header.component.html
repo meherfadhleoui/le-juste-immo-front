@@ -1,0 +1,28 @@
+<p-menubar [model]="menuItems">
+  <ng-template pTemplate="start">
+    <img
+      src="assets/small-logo.png"
+      [routerLink]="'/home'"
+      class="w-10 h-10 mr-20 ml-2 cursor-pointer"
+    />
+  </ng-template>
+  <ng-template pTemplate="end">
+    <div class="flex items-center justify-center">
+      <p-button
+        label="Créer une annonce"
+        styleClass="p-button-link font-light accent"
+        class="create-annonce-btn"
+      ></p-button>
+
+      <p-avatar
+        [image]="isAuthenticated ? user.avatar : ''"
+        size="normal"
+        shape="circle"
+        (click)="menu.toggle($event)"
+        styleClass="cursor-pointer ml-2 avatar-icon"
+        [icon]="!isAuthenticated ? 'pi pi-user' : ''"
+      ></p-avatar>
+      <p-menu #menu [model]="profileMenu" [popup]="true"></p-menu>
+    </div>
+  </ng-template>
+</p-menubar>

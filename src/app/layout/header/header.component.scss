@@ -1,0 +1,25 @@
+:host {
+  ::ng-deep {
+    .p-menubar {
+      background-color: var(--secondary);
+      border: none;
+      border-radius: 0%;
+      box-shadow: 0 2px 4px -1px var(--accent);
+    }
+
+    .p-menuitem .p-menuitem-text {
+      color: var(--primary);
+    }
+
+    .avatar-icon {
+      color: var(--primary);
+      background-color: var(--secondary);
+      border: 1px solid var(--primary);
+    }
+
+    .create-annonce-btn > * {
+      border: none;
+      box-shadow: none;
+    }
+  }
+}

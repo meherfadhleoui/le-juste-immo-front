@@ -1,0 +1,48 @@
+:host {
+  ::ng-deep {
+    .p-dropdown {
+      width: 180px;
+      border: none;
+      box-shadow: none;
+      border-left: 1px solid#ced4da;
+      border-radius: 0px !important;
+      background-color: transparent;
+    }
+
+    .p-selectbutton .p-button.p-highlight {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--secondary);
+      border: none;
+      box-shadow: none;
+    }
+
+    .search-input.p-inputtext {
+      width: 260px;
+      border: none;
+      border-radius: 0px;
+      background-color: transparent;
+      &:focus {
+        border: none;
+        box-shadow: unset;
+      }
+    }
+  }
+}
+
+.search-container {
+  border: 1px solid #ced4da;
+  background-color: white;
+  padding: 10px;
+  margin: auto;
+  border-radius: 6px;
+  border-radius: 60px;
+}
+
+.home-container {
+  min-height: 400px;
+  background-image: url('http://blackconcept-dev.com:5458/img/banner/img-5.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  object-fit: cover;
+}

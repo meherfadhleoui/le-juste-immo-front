@@ -15,26 +15,32 @@
 
 // Brand colors
 .primary {
-  color: #2e3531;
+  color: var(--primary);
 }
 
 .secondary {
-  color: #ffffff;
+  color: var(--secondary);
 }
 
 .accent {
-  color: #4c9e6c;
+  color: var(--accent);
+}
+
+:root {
+  --primary: #2e3531;
+  --secondary: #ffffff;
+  --accent: #4c9e6c;
 }
 
 // Brand Background colors
 .bg-primary {
-  background-color: #2e3531;
+  background-color: var(--primary);
 }
 
 .bg-secondary {
-  background-color: #ffffff;
+  background-color: var(--secondary);
 }
 
 .bg-accent {
-  background-color: #4c9e6c;
+  background-color: var(--accent);
 }

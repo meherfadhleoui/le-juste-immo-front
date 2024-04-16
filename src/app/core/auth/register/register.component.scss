@@ -20,8 +20,8 @@
   }
 
   ::ng-deep .p-selectbutton .p-button.p-highlight {
-    background: #4c9e6c;
-    border-color: #4c9e6c;
-    color: #ffffff;
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--secondary);
   }
 }

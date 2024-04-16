@@ -1,0 +1,59 @@
+<div class="home-container flex flex-col gap-10 text-center p-10">
+  <span class="text-3xl secondary font-bold"
+    >TROUVEZ VOTRE MAISON DE RÊVE
+  </span>
+  <span class="text-xl secondary font-bold"
+    >TROUVEZ VOTRE FUTUR LOGEMENT, QUE CE SOIT POUR ACHETER, LOUER
+  </span>
+  <p-selectButton
+    [options]="searchType"
+    class="mt-4"
+    [(ngModel)]="selectedSearchType"
+  ></p-selectButton>
+
+  <div
+    class="flex gap-0 items-center justify-center search-container shadow-2xl flex-wrap"
+  >
+    <input
+      type="text"
+      pInputText
+      placeholder="Recherche..."
+      class="search-input"
+    />
+    <p-dropdown
+      [options]="options"
+      optionLabel="value"
+      optionValue="value"
+      placeholder="Type"
+      emptyFilterMessage="Aucun résultat trouvé"
+      emptyMessage="Aucun résultat trouvé"
+      [filter]="true"
+      [resetFilterOnHide]="true"
+    ></p-dropdown>
+    <p-dropdown
+      [options]="options"
+      optionLabel="value"
+      optionValue="value"
+      placeholder="Emplacement"
+      emptyFilterMessage="Aucun résultat trouvé"
+      emptyMessage="Aucun résultat trouvé"
+      [filter]="true"
+      [resetFilterOnHide]="true"
+    ></p-dropdown>
+    <p-dropdown
+      [options]="options"
+      optionLabel="value"
+      optionValue="value"
+      placeholder="Chambre"
+      emptyFilterMessage="Aucun résultat trouvé"
+      emptyMessage="Aucun résultat trouvé"
+    ></p-dropdown>
+    <button
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-search"
+      class="p-button-rounded bg-accent"
+    ></button>
+  </div>
+</div>

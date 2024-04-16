@@ -8,6 +8,10 @@ import { PasswordModule } from 'primeng/password';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FieldsetModule } from 'primeng/fieldset';
 import { DropdownModule } from 'primeng/dropdown';
+import { RippleModule } from 'primeng/ripple';
+import { MenubarModule } from 'primeng/menubar';
+import { AvatarModule } from 'primeng/avatar';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
   exports: [
@@ -20,6 +24,10 @@ import { DropdownModule } from 'primeng/dropdown';
     SelectButtonModule,
     FieldsetModule,
     DropdownModule,
+    RippleModule,
+    MenubarModule,
+    AvatarModule,
+    MenuModule,
   ],
 })
 export class PrimengModule {}
