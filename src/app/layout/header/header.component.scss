@@ -7,19 +7,31 @@
       box-shadow: 0 2px 4px -1px var(--accent);
     }
 
+    .p-menubar-root-list {
+      gap: 10px;
+    }
+
     .p-menuitem .p-menuitem-text {
       color: var(--primary);
+    }
+
+    .p-menuitem-link-active {
+      background-color: var(--accent);
+      border-radius: 6px;
+      .p-menuitem-text {
+        color: var(--secondary);
+      }
+    }
+
+    .create-annonce-btn > * {
+      border: none;
+      box-shadow: none;
     }
 
     .avatar-icon {
       color: var(--primary);
       background-color: var(--secondary);
       border: 1px solid var(--primary);
-    }
-
-    .create-annonce-btn > * {
-      border: none;
-      box-shadow: none;
     }
   }
 }

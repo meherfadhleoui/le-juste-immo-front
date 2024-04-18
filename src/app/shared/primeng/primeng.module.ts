@@ -12,6 +12,9 @@ import { RippleModule } from 'primeng/ripple';
 import { MenubarModule } from 'primeng/menubar';
 import { AvatarModule } from 'primeng/avatar';
 import { MenuModule } from 'primeng/menu';
+import { CardModule } from 'primeng/card';
+import { DividerModule } from 'primeng/divider';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   exports: [
@@ -28,6 +31,9 @@ import { MenuModule } from 'primeng/menu';
     MenubarModule,
     AvatarModule,
     MenuModule,
+    CardModule,
+    DividerModule,
+    TagModule,
   ],
 })
 export class PrimengModule {}

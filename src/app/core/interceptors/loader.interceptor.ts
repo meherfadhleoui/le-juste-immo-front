@@ -24,9 +24,11 @@ export class LoaderInterceptor implements HttpInterceptor {
       return next.handle(request);
     }
 
+    const params = request.params.delete('showLoader');
+
     this.totalRequests++;
     this._loaderService.showLoader();
-    return next.handle(request).pipe(
+    return next.handle(request.clone({ params })).pipe(
       finalize(() => {
         this.totalRequests--;
         if (this.totalRequests == 0) {

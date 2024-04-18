@@ -1,0 +1,57 @@
+<p-card [style]="{ width: '100%' }">
+  <ng-template pTemplate="header">
+    <img
+      alt="Card"
+      src="http://blackconcept-dev.com:5458/img/post/20/main.jpg"
+      class="rounded-t-md"
+    />
+
+    <div class="flex items-center justify-between p-3">
+      <span class="accent text-lg font-semibold">Grande maison</span>
+
+      <div class="flex items-center gap-2 font-medium text-sm">
+        <i class="pi pi-map-marker" style="font-size: 1.2rem"></i>
+        <span>{{ 'paris' | titlecase }}</span>
+      </div>
+    </div>
+  </ng-template>
+
+  <div class="flex flex-col gap-3 text-xs">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined accent"> crop_square </span>
+        <span> 120m² </span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined accent"> bed </span>
+        <span> 2 Chambres </span>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined accent"> shower </span>
+
+      <span> 2 Salles de bain </span>
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined"> person </span>
+        <span>{{ 'Maher fadhlaoui' | titlecase }}</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined"> calendar_month </span>
+        <span>{{ '12/07/2023' }}</span>
+      </div>
+    </div>
+
+    <div
+      class="flex items-center justify-center gap-2 cursor-pointer mt-2 font-semibold"
+    >
+      <span class="material-symbols-outlined accent"> pin_drop </span>
+      <span class="">Sur la carte</span>
+    </div>
+  </div>
+</p-card>

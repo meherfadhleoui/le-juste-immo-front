@@ -31,7 +31,10 @@ export class UserService {
           this._user.next(user);
           return of(true);
         }),
-        catchError(() => of(false)),
+        catchError(() => {
+          localStorage.clear();
+          return of(false);
+        }),
       );
   }
 

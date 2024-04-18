@@ -1,1 +1,9 @@
 <app-home-search></app-home-search>
+
+<div class="text-center p-10">
+  <p-tag value="Meilleures" [rounded]="true" styleClass="tag"></p-tag>
+</div>
+
+<div class="cards-container">
+  <app-annonce-card *ngFor="let i of [1, 2, 3, 4, 5, 6]"></app-annonce-card>
+</div>

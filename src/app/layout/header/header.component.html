@@ -22,7 +22,12 @@
         styleClass="cursor-pointer ml-2 avatar-icon"
         [icon]="!isAuthenticated ? 'pi pi-user' : ''"
       ></p-avatar>
-      <p-menu #menu [model]="profileMenu" [popup]="true"></p-menu>
+      <p-menu
+        #menu
+        [model]="profileMenu"
+        [popup]="true"
+        appendTo="body"
+      ></p-menu>
     </div>
   </ng-template>
 </p-menubar>
