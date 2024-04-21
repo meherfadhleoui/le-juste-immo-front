@@ -8,7 +8,7 @@ describe('ControlErrorComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ControlErrorComponent]
+      declarations: [ControlErrorComponent],
     });
     fixture = TestBed.createComponent(ControlErrorComponent);
     component = fixture.componentInstance;

@@ -31,6 +31,7 @@ export class HeaderComponent implements OnInit {
       this.isAuthenticated = isAuthenticated;
       this.initMenuItems();
       this.initProfileItems();
+
       this._userService.user$.subscribe((user) => {
         this.user = user;
       });

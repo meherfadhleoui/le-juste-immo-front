@@ -8,7 +8,7 @@ describe('ConfirmatonRequiredComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ConfirmatonRequiredComponent]
+      imports: [ConfirmatonRequiredComponent],
     });
     fixture = TestBed.createComponent(ConfirmatonRequiredComponent);
     component = fixture.componentInstance;

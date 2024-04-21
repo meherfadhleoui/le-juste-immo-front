@@ -190,6 +190,11 @@
 }
 
 @layer primeng {
+  /* Set label opacity for disabled inputs  */
+  .p-component:disabled + label {
+    opacity: 0.6;
+  }
+
   p-autocomplete.ng-touched.ng-invalid > .p-autocomplete > .p-inputtext {
     border-color: #e24c4c;
   }

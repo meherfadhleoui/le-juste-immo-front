@@ -89,7 +89,7 @@
               optionLabel="name"
               [showClear]="true"
               placeholder="Pays"
-              (onChange)="onCountryChanged($event)"
+              (onChange)="onPhysicalCountryChanged($event)"
               [filter]="true"
               [resetFilterOnHide]="true"
               class="w-full"
@@ -99,14 +99,16 @@
               <ng-template pTemplate="selectedItem">
                 <div
                   class="flex items-center gap-2 w-full"
-                  *ngIf="selectedCountry"
+                  *ngIf="selectedPhysicalCountry"
                 >
                   <img
                     src="assets/styles/flag_placeholder.png"
-                    [class]="'flag flag-' + selectedCountry.code.toLowerCase()"
+                    [class]="
+                      'flag flag-' + selectedPhysicalCountry.code.toLowerCase()
+                    "
                     style="width: 20px"
                   />
-                  <div>{{ selectedCountry.name }}</div>
+                  <div>{{ selectedPhysicalCountry.name }}</div>
                 </div>
               </ng-template>
               <ng-template let-country pTemplate="item">
@@ -126,7 +128,7 @@
 
           <span class="w-full">
             <p-dropdown
-              [options]="selectedCountry?.states | stringToObject"
+              [options]="selectedPhysicalCountry?.states | stringToObject"
               optionLabel="value"
               optionValue="value"
               placeholder="Ville"
@@ -170,18 +172,100 @@
 
     <p-fieldset *ngIf="selectedRole === Role.Agence">
       <ng-template pTemplate="header">
-        <span class="font-normal">Adresse de facturation</span>
+        <div class="flex gap-2">
+          <span class="font-normal">Adresse de facturation</span>
+          <span class="flex align-items-center gap-2">
+            <p-checkbox
+              [binary]="true"
+              (onChange)="onCheckboxChange($event)"
+            ></p-checkbox>
+            <label class="accent font-normal"
+              >Identique à l'Adresse Physique</label
+            >
+          </span>
+        </div>
       </ng-template>
+
       <div formGroupName="billingAddress">
         <div class="flex gap-4 mb-8">
           <span class="w-full">
-            <span class="p-float-label">
-              <input pInputText inputId="pays" formControlName="pays" />
-              <label htmlFor="pays">Pays</label>
-            </span>
-            <control-error [control]="registerForm.get('pays')" />
+            <p-dropdown
+              [options]="countries"
+              optionLabel="name"
+              [showClear]="true"
+              placeholder="Pays"
+              (onChange)="onBillingCountryChanged($event)"
+              [filter]="true"
+              [resetFilterOnHide]="true"
+              class="w-full"
+              formControlName="pays"
+              id="pays"
+            >
+              <ng-template pTemplate="selectedItem">
+                <div
+                  class="flex items-center gap-2 w-full"
+                  *ngIf="selectedBillingCountry"
+                >
+                  <img
+                    src="assets/styles/flag_placeholder.png"
+                    [class]="
+                      'flag flag-' + selectedBillingCountry.code.toLowerCase()
+                    "
+                    style="width: 20px"
+                  />
+                  <div>{{ selectedBillingCountry.name }}</div>
+                </div>
+              </ng-template>
+              <ng-template let-country pTemplate="item">
+                <div class="flex items-center gap-2 w-full">
+                  <img
+                    src="assets/styles/flag_placeholder.png"
+                    [class]="'flag flag-' + country.code.toLowerCase()"
+                    style="width: 20px"
+                  />
+                  <div>{{ country.name }}</div>
+                </div>
+              </ng-template>
+            </p-dropdown>
+
+            <control-error
+              [control]="registerForm.get('billingAddress.pays')"
+            />
           </span>
 
+          <span class="w-full">
+            <p-dropdown
+              [options]="selectedBillingCountry?.states | stringToObject"
+              optionLabel="value"
+              optionValue="value"
+              placeholder="Ville"
+              class="w-full"
+              emptyFilterMessage="Aucun résultat trouvé"
+              emptyMessage="Aucun résultat trouvé"
+              [filter]="true"
+              [resetFilterOnHide]="true"
+              formControlName="city"
+            ></p-dropdown>
+            <control-error
+              [control]="registerForm.get('billingAddress.city')"
+            />
+          </span>
+        </div>
+
+        <div class="flex gap-4 mb-8">
+          <span class="w-full">
+            <span class="p-float-label">
+              <input
+                pInputText
+                inputId="libelleVoie"
+                formControlName="libelleVoie"
+              />
+              <label htmlFor="libelleVoie">Libellé de la voie</label>
+            </span>
+            <control-error
+              [control]="registerForm.get('billingAddress.libelleVoie')"
+            />
+          </span>
           <span class="w-full">
             <span class="p-float-label">
               <input
@@ -191,21 +275,11 @@
               />
               <label htmlFor="codePostal">Code postal</label>
             </span>
-            <control-error [control]="registerForm.get('codePostal')" />
+            <control-error
+              [control]="registerForm.get('billingAddress.codePostal')"
+            />
           </span>
         </div>
-
-        <span class="w-full">
-          <span class="p-float-label">
-            <input
-              pInputText
-              inputId="libelleVoie"
-              formControlName="libelleVoie"
-            />
-            <label htmlFor="libelleVoie">Libellé de la voie</label>
-          </span>
-          <control-error [control]="registerForm.get('libelleVoie')" />
-        </span>
       </div>
     </p-fieldset>
 

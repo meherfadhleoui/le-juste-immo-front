@@ -13,7 +13,6 @@ export class UserService {
   constructor(private httpClient: HttpClient) {}
 
   set user(user: User) {
-    localStorage.setItem('userId', user._id);
     this._user.next(user);
   }
 
@@ -21,21 +20,18 @@ export class UserService {
     return this._user.asObservable();
   }
 
-  get() {
+  get(userId: string): Observable<boolean> {
     const params = new HttpParams().append('showLoader', true);
 
-    return this.httpClient
-      .get<User>(`/user/${localStorage.getItem('userId')}`, { params })
-      .pipe(
-        mergeMap((user) => {
-          this._user.next(user);
-          return of(true);
-        }),
-        catchError(() => {
-          localStorage.clear();
-          return of(false);
-        }),
-      );
+    return this.httpClient.get<User>(`/user/${userId}`, { params }).pipe(
+      mergeMap((user) => {
+        this._user.next(user);
+        return of(true);
+      }),
+      catchError(() => {
+        return of(false);
+      }),
+    );
   }
 
   update(user: User): Observable<any> {
@@ -43,6 +39,18 @@ export class UserService {
       map((response) => {
         this._user.next(response);
       }),
+    );
+  }
+
+  signInUsingToken(token: string) {
+    const params = new HttpParams()
+      .append('skipErrorMessage', true)
+      .append('showLoader', true);
+
+    return this.httpClient.post<{ token: string; id: string }>(
+      '/auth/refresh-token',
+      { token },
+      { params },
     );
   }
 }

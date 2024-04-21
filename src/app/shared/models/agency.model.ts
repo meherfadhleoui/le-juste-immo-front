@@ -1,7 +1,7 @@
 import { Role } from '../enums/role.enum';
 import { Address } from './address.model';
 
-export interface User {
+export interface Agency {
   _id: string;
   role: Role;
   email: string;
@@ -10,6 +10,7 @@ export interface User {
   phone: string;
   avatar: string;
   address: Address;
+  billingAddress: Address;
   createdAt: Date;
   updatedAt: Date;
 }

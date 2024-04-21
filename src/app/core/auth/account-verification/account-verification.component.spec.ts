@@ -8,7 +8,7 @@ describe('AccountVerificationComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AccountVerificationComponent]
+      imports: [AccountVerificationComponent],
     });
     fixture = TestBed.createComponent(AccountVerificationComponent);
     component = fixture.componentInstance;

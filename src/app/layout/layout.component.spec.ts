@@ -8,7 +8,7 @@ describe('LayoutComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [LayoutComponent]
+      imports: [LayoutComponent],
     });
     fixture = TestBed.createComponent(LayoutComponent);
     component = fixture.componentInstance;

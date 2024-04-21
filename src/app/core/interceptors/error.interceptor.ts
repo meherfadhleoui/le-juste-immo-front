@@ -12,8 +12,6 @@ import { MessageService } from 'primeng/api';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  skipedApis = ['account_confirmation'];
-
   constructor(
     private _authService: AuthService,
     private messageService: MessageService,
@@ -23,19 +21,26 @@ export class ErrorInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler,
   ): Observable<HttpEvent<unknown>> {
-    return next.handle(request).pipe(
+    const skipErrorMessage = request.params.get('skipErrorMessage');
+    const params = request.params.delete('skipErrorMessage');
+
+    return next.handle(request.clone({ params })).pipe(
       catchError((error) => {
+        // Server  down
+        if (error instanceof HttpErrorResponse && error.status === 0) {
+          const message =
+            'Le serveur est actuellement inaccessible. Veuillez réessayer plus tard.';
+
+          this.showError(message);
+          return throwError(() => error);
+        }
+
         // Catch "401 Unauthorized" responses
-        // TODO
         if (error instanceof HttpErrorResponse && error.status === 401) {
           this._authService.signOut();
         }
 
-        const skipRenderError = this.skipedApis.find((skipedApi) =>
-          request.url.includes(skipedApi),
-        );
-
-        if (!skipRenderError) {
+        if (!skipErrorMessage) {
           this.showError(error.error.message);
         }
 

@@ -1,5 +1,16 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  Component,
+  DestroyRef,
+  OnDestroy,
+  OnInit,
+  inject,
+} from '@angular/core';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 import { Role } from 'src/app/shared/enums/role.enum';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -10,6 +21,8 @@ import { Country } from 'src/app/shared/models/country.model';
 import { confirmPasswordValidator } from 'src/app/shared/Validators/password-match';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
+import { CheckboxChangeEvent } from 'primeng/checkbox';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -18,21 +31,22 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [SharedModule],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   registerForm!: FormGroup;
+
   Role = Role;
   selectedRole: Role = Role.Particulier;
-  selectedCountry?: Country;
-
   registerRoleOptions: SelectItem[] = [
     { label: Role.Particulier, value: Role.Particulier, icon: 'pi pi-user' },
     { label: Role.Agence, value: Role.Agence, icon: 'pi pi-building' },
   ];
 
   countries = COUNTRIES;
+  selectedPhysicalCountry?: Country;
+  selectedBillingCountry?: Country;
+  physicalAddressSubscription?: Subscription;
 
   isLoading = false;
-
   destroyRef = inject(DestroyRef);
 
   constructor(
@@ -83,15 +97,17 @@ export class RegisterComponent implements OnInit {
         confirmPasswordValidator,
       ]),
       address: this.fb.group({
+        pays: this.fb.control('', Validators.required),
+        city: this.fb.control('', Validators.required),
         libelleVoie: this.fb.control(''),
-        pays: this.fb.control(''),
         codePostal: this.fb.control(''),
       }),
       siret: this.fb.control('', [Validators.required]),
       nomAgence: this.fb.control(''),
       billingAddress: this.fb.group({
+        pays: this.fb.control('', Validators.required),
+        city: this.fb.control('', Validators.required),
         libelleVoie: this.fb.control(''),
-        pays: this.fb.control(''),
         codePostal: this.fb.control(''),
       }),
       phone: this.fb.control(null, Validators.required),
@@ -110,14 +126,51 @@ export class RegisterComponent implements OnInit {
   onRoleChange(role: Role) {
     this.selectedRole = role;
     if (this.selectedRole === Role.Particulier) {
+      this.stopUpdatingBillingAddress();
       return this.initUserForm();
     }
 
     this.initAgencyForm();
   }
 
-  onCountryChanged(event: DropdownChangeEvent) {
-    this.selectedCountry = event.value;
+  onPhysicalCountryChanged(event: DropdownChangeEvent) {
+    this.selectedPhysicalCountry = event.value;
+  }
+
+  onBillingCountryChanged(event: DropdownChangeEvent) {
+    this.selectedBillingCountry = event.value;
+  }
+
+  onCheckboxChange(checkboxChangeEvent: CheckboxChangeEvent) {
+    if (checkboxChangeEvent.checked) {
+      return this.updateBillingAddress();
+    }
+
+    this.stopUpdatingBillingAddress();
+  }
+
+  updateBillingAddress() {
+    const physicalAddress = this.registerForm.get('address');
+    const billingAddress = this.registerForm.get('billingAddress');
+
+    this.selectedBillingCountry = this.selectedPhysicalCountry;
+    billingAddress?.patchValue({ ...physicalAddress?.value });
+    billingAddress?.disable();
+
+    this.physicalAddressSubscription = physicalAddress?.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((address) => {
+        billingAddress?.patchValue(address);
+
+        setTimeout(() => {
+          this.selectedBillingCountry = this.selectedPhysicalCountry;
+        }, 0);
+      });
+  }
+
+  stopUpdatingBillingAddress() {
+    this.physicalAddressSubscription?.unsubscribe();
+    this.registerForm.get('billingAddress')?.enable();
   }
 
   submit() {
@@ -126,8 +179,14 @@ export class RegisterComponent implements OnInit {
     }
 
     this.isLoading = true;
-    const { confirmPassword, ...registerFormValues } = this.registerForm.value;
+    const { confirmPassword, ...registerFormValues } =
+      this.registerForm.getRawValue();
+
     registerFormValues.address.pays = registerFormValues.address.pays.name;
+    if (this.selectedRole === Role.Agence) {
+      registerFormValues.billingAddress.pays =
+        registerFormValues.billingAddress.pays.name;
+    }
 
     this._authService
       .register(registerFormValues)
@@ -141,5 +200,9 @@ export class RegisterComponent implements OnInit {
           this.isLoading = false;
         },
       });
+  }
+
+  ngOnDestroy(): void {
+    this.physicalAddressSubscription?.unsubscribe();
   }
 }

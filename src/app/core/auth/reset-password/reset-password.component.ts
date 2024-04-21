@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { confirmPasswordValidator } from 'src/app/shared/Validators/password-match';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AuthService } from '../auth.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-reset-password',
@@ -10,9 +15,66 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [SharedModule],
 })
 export class ResetPasswordComponent implements OnInit {
-  constructor(private activateRoute: ActivatedRoute) {}
+  resetPasswordForm!: FormGroup;
+  isLoading = false;
+  destroyRef = inject(DestroyRef);
+
+  constructor(
+    private activateRoute: ActivatedRoute,
+    private fb: FormBuilder,
+    private _authService: AuthService,
+    private messageService: MessageService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
+    this.initForm();
+    this.updateConfirmPasswordValidity();
+  }
+
+  initForm() {
+    this.resetPasswordForm = this.fb.group({
+      password: this.fb.control('', [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
+      confirmPassword: this.fb.control('', [
+        Validators.required,
+        confirmPasswordValidator,
+      ]),
+    });
+  }
+
+  updateConfirmPasswordValidity() {
+    this.resetPasswordForm
+      .get('password')
+      ?.valueChanges.pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.resetPasswordForm.get('confirmPassword')?.updateValueAndValidity();
+      });
+  }
+
+  resetPassword() {
+    if (this.resetPasswordForm.invalid) {
+      return this.resetPasswordForm.markAllAsTouched();
+    }
+
+    this.isLoading = true;
     const token = this.activateRoute.snapshot.params['token'];
+    const { password } = this.resetPasswordForm.value;
+
+    this._authService.resetPassword(password, token).subscribe({
+      next: (res) => {
+        this.router.navigate(['/login']);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Succès',
+          detail: res.message,
+        });
+      },
+      error: () => {
+        this.isLoading = false;
+      },
+    });
   }
 }
