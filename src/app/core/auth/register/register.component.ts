@@ -5,24 +5,22 @@ import {
   OnInit,
   inject,
 } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 import { Role } from 'src/app/shared/enums/role.enum';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthService } from '../auth.service';
-import { COUNTRIES } from 'src/app/shared/constants/countries';
-import { DropdownChangeEvent } from 'primeng/dropdown';
-import { Country } from 'src/app/shared/models/country.model';
 import { confirmPasswordValidator } from 'src/app/shared/Validators/password-match';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { CheckboxChangeEvent } from 'primeng/checkbox';
 import { Subscription } from 'rxjs';
+import { DataService } from 'src/app/shared/services/data.service';
+import { Country, FranceCity } from 'src/app/shared/models/address.model';
+import {
+  FRANCE_LABEL,
+  getFranceCitiesModified,
+} from 'src/app/shared/utils/utils';
 
 @Component({
   selector: 'app-register',
@@ -41,10 +39,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
     { label: Role.Agence, value: Role.Agence, icon: 'pi pi-building' },
   ];
 
-  countries = COUNTRIES;
-  selectedPhysicalCountry?: Country;
-  selectedBillingCountry?: Country;
+  countries: Country[] = [];
+  franceCities: (FranceCity & { codeAndCity: string })[] = [];
+  selectedBillingCountry?: any;
   physicalAddressSubscription?: Subscription;
+  FRANCE_LABEL = FRANCE_LABEL;
+
+  selectedPhysicalCountry?: Country;
+  selectedPhysicalFrenchCity?: FranceCity & { codeAndCity: string };
 
   isLoading = false;
   destroyRef = inject(DestroyRef);
@@ -53,14 +55,33 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private router: Router,
     private _authService: AuthService,
+    private _dataService: DataService,
   ) {}
 
   ngOnInit(): void {
-    this.initUserForm();
+    this.initParticulierForm();
     this.updateConfirmPasswordValidity();
+    this.initData();
   }
 
-  initUserForm() {
+  initData() {
+    this.getCountries();
+    this.getFranceCities();
+  }
+
+  getFranceCities() {
+    this._dataService.getFranceCities().subscribe((franceCities) => {
+      this.franceCities = getFranceCitiesModified(franceCities);
+    });
+  }
+
+  getCountries() {
+    this._dataService.getCountries().subscribe((countries) => {
+      this.countries = countries;
+    });
+  }
+
+  initParticulierForm() {
     this.registerForm = this.fb.group({
       role: this.fb.control(Role.Particulier),
       email: this.fb.control('', [Validators.required, Validators.email]),
@@ -72,7 +93,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       ]),
       confirmPassword: this.fb.control('', [
         Validators.required,
-        confirmPasswordValidator,
+        confirmPasswordValidator(),
       ]),
       address: this.fb.group({
         pays: this.fb.control('', Validators.required),
@@ -94,7 +115,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       ]),
       confirmPassword: this.fb.control('', [
         Validators.required,
-        confirmPasswordValidator,
+        confirmPasswordValidator(),
       ]),
       address: this.fb.group({
         pays: this.fb.control('', Validators.required),
@@ -127,18 +148,52 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.selectedRole = role;
     if (this.selectedRole === Role.Particulier) {
       this.stopUpdatingBillingAddress();
-      return this.initUserForm();
+      return this.initParticulierForm();
     }
 
     this.initAgencyForm();
   }
 
-  onPhysicalCountryChanged(event: DropdownChangeEvent) {
-    this.selectedPhysicalCountry = event.value;
+  onPhysicalCountryChanged(selectedCountry: Country) {
+    if (selectedCountry.id !== this.selectedPhysicalCountry?.id) {
+      this.registerForm.patchValue({
+        address: {
+          city: '',
+          codePostal: '',
+        },
+      });
+    }
+
+    this.selectedPhysicalCountry = selectedCountry;
   }
 
-  onBillingCountryChanged(event: DropdownChangeEvent) {
-    this.selectedBillingCountry = event.value;
+  onPhysicalFranceCityChanged(codePostal: string) {
+    this.registerForm.patchValue({
+      address: {
+        codePostal,
+      },
+    });
+  }
+
+  onBillingFranceCityChanged(codePostal: string) {
+    this.registerForm.patchValue({
+      billingAddress: {
+        codePostal,
+      },
+    });
+  }
+
+  onBillingCountryChanged(selectedBillingCountry: Country) {
+    if (selectedBillingCountry.id !== this.selectedBillingCountry?.id) {
+      this.registerForm.patchValue({
+        billingAddress: {
+          city: '',
+          codePostal: '',
+        },
+      });
+    }
+
+    this.selectedBillingCountry = selectedBillingCountry;
   }
 
   onCheckboxChange(checkboxChangeEvent: CheckboxChangeEvent) {
@@ -182,10 +237,17 @@ export class RegisterComponent implements OnInit, OnDestroy {
     const { confirmPassword, ...registerFormValues } =
       this.registerForm.getRawValue();
 
-    registerFormValues.address.pays = registerFormValues.address.pays.name;
-    if (this.selectedRole === Role.Agence) {
-      registerFormValues.billingAddress.pays =
-        registerFormValues.billingAddress.pays.name;
+    if (registerFormValues.address.pays === this.FRANCE_LABEL) {
+      registerFormValues.address.city =
+        registerFormValues.address.city.split(' - ')[1];
+    }
+
+    if (
+      registerFormValues.role === Role.Agence &&
+      registerFormValues.billingAddress.pays === this.FRANCE_LABEL
+    ) {
+      registerFormValues.billingAddress.city =
+        registerFormValues.billingAddress.city.split(' - ')[1];
     }
 
     this._authService

@@ -5,7 +5,7 @@ import { MenuItem } from 'primeng/api';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/auth/user.service';
-import { User } from '../../shared/models/user.model';
+import { User } from '../../shared/models/user.models';
 
 @Component({
   selector: 'app-header',
@@ -62,6 +62,7 @@ export class HeaderComponent implements OnInit {
         label: 'Profile',
         icon: 'pi pi-user',
         visible: this.isAuthenticated,
+        routerLink: ['/profile'],
       },
       {
         label: 'Déconnexion',

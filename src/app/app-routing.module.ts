@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthRoutingModule } from './core/auth/auth-routing.module';
 import { LayoutComponent } from './layout/layout.component';
+import { PROFILE_ROUTE } from './modules/user/profile/profile-route';
 
 const routes: Routes = [
   // Redirect empty path to '/home'
@@ -18,6 +19,7 @@ const routes: Routes = [
             (mod) => mod.HomeComponent,
           ),
       },
+      PROFILE_ROUTE,
     ],
   },
 

@@ -13,3 +13,16 @@ export interface User {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface Admin extends User {
+  role: Role.Admin;
+}
+
+export interface Agency extends User {
+  role: Role.Agence;
+  billingAddress: Address;
+}
+
+export interface Particulier extends User {
+  role: Role.Particulier;
+}

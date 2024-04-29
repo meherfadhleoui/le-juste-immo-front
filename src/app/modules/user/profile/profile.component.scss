@@ -1,0 +1,24 @@
+:host {
+  ::ng-deep {
+    .p-menu {
+      width: max-content;
+      padding: 6px;
+      gap: 20px;
+    }
+
+    .p-menu-list li:not(:last-child) {
+      margin-bottom: 6px;
+    }
+
+    .p-menuitem-link-active {
+      background-color: var(--accent);
+      border-radius: 6px;
+      * {
+        color: var(--secondary);
+      }
+    }
+    .dividera {
+      border-bottom: 1px solid #dee2e6;
+    }
+  }
+}

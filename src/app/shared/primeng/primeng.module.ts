@@ -16,6 +16,7 @@ import { CardModule } from 'primeng/card';
 import { DividerModule } from 'primeng/divider';
 import { TagModule } from 'primeng/tag';
 import { CheckboxModule } from 'primeng/checkbox';
+import { ImageModule } from 'primeng/image';
 
 @NgModule({
   exports: [
@@ -36,6 +37,7 @@ import { CheckboxModule } from 'primeng/checkbox';
     DividerModule,
     TagModule,
     CheckboxModule,
+    ImageModule,
   ],
 })
 export class PrimengModule {}

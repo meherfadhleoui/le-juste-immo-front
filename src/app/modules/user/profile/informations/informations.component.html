@@ -1,0 +1,335 @@
+<div *ngIf="user" class="flex flex-col items-center justify-center">
+  <p-image
+    [src]="imageUrl || user.avatar"
+    alt="Image"
+    [preview]="true"
+  ></p-image>
+
+  <span
+    class="material-symbols-outlined camera p-1 rounded-full -mt-7 z-30 text-black cursor-pointer"
+    (click)="imageUrl ? onImageCancel(imageInput) : imageInput.click()"
+  >
+    {{ imageUrl ? 'cancel' : 'photo_camera' }}
+  </span>
+
+  <input
+    #imageInput
+    accept="image/*"
+    (change)="onImageUpload($event)"
+    type="file"
+    class="hidden"
+  />
+</div>
+
+<div
+  [formGroup]="form"
+  *ngIf="form"
+  class="flex flex-col gap-4 mt-4 items-center justify-center w-full"
+>
+  <div class="flex gap-4 w-full" *ngIf="user?.role === Role.Particulier">
+    <input
+      pInputText
+      placeholder="Nom"
+      class="w-full"
+      formControlName="firstName"
+    />
+    <input
+      pInputText
+      placeholder="Prénom"
+      class="w-full"
+      formControlName="lastName"
+    />
+  </div>
+
+  <div class="flex gap-4 w-full" *ngIf="user?.role === Role.Agence">
+    <input
+      pInputText
+      placeholder="Nom de l'agence"
+      class="w-full"
+      formControlName="nomAgence"
+    />
+    <input
+      pInputText
+      placeholder="Siret"
+      class="w-full"
+      formControlName="siret"
+    />
+  </div>
+
+  <div class="flex gap-4 w-full">
+    <p-inputNumber
+      placeholder="Téléphone"
+      class="w-full"
+      styleClass="w-full"
+      formControlName="phone"
+    >
+    </p-inputNumber>
+  </div>
+
+  <p-fieldset>
+    <ng-template pTemplate="header">
+      <span class="font-normal">Adresse physique</span>
+    </ng-template>
+    <div formGroupName="address">
+      <div class="flex gap-4 mb-8">
+        <span class="w-full">
+          <p-dropdown
+            #physicalCountryDropdown
+            [options]="countries"
+            optionLabel="countryLabel"
+            optionValue="countryLabel"
+            placeholder="Pays"
+            [filter]="true"
+            [resetFilterOnHide]="true"
+            class="w-full"
+            formControlName="pays"
+            id="pays"
+            (onChange)="
+              onPhysicalCountryChanged(physicalCountryDropdown.selectedOption)
+            "
+          >
+            <!-- TO Integrate Later For Flags -->
+
+            <!-- <ng-template pTemplate="selectedItem">
+              <div
+                class="flex items-center gap-2 w-full"
+                *ngIf="selectedPhysicalCountry"
+              >
+                <img
+                  src="assets/styles/flag_placeholder.png"
+                  [class]="
+                    'flag flag-' + selectedPhysicalCountry.code.toLowerCase()
+                  "
+                  style="width: 20px"
+                />
+                <div>{{ selectedPhysicalCountry.name }}</div>
+              </div>
+            </ng-template>
+            <ng-template let-country pTemplate="item">
+              <div class="flex items-center gap-2 w-full">
+                <img
+                  src="assets/styles/flag_placeholder.png"
+                  [class]="'flag flag-' + country.code.toLowerCase()"
+                  style="width: 20px"
+                />
+                <div>{{ country.name }}</div>
+              </div>
+            </ng-template> -->
+          </p-dropdown>
+
+          <control-error [control]="form.get('address.pays')" />
+        </span>
+
+        <span class="w-full">
+          <p-dropdown
+            *ngIf="form.get('address.pays')?.value === FRANCE_LABEL"
+            [options]="franceCities"
+            optionLabel="codeAndCity"
+            optionValue="codeAndCity"
+            placeholder="Ville"
+            class="w-full"
+            emptyFilterMessage="Aucun résultat trouvé"
+            emptyMessage="Aucun résultat trouvé"
+            [filter]="true"
+            [resetFilterOnHide]="true"
+            formControlName="city"
+            [virtualScroll]="true"
+            [itemSize]="30"
+            #physicalFranceCityDrop
+            (onChange)="
+              onPhysicalFranceCityChanged(
+                physicalFranceCityDrop.selectedOption.postCode
+              )
+            "
+          >
+          </p-dropdown>
+
+          <input
+            *ngIf="form.get('address.pays')?.value !== FRANCE_LABEL"
+            pInputText
+            formControlName="city"
+            placeholder="Ville"
+          />
+
+          <control-error [control]="form.get('address.city')" />
+        </span>
+      </div>
+
+      <div class="flex gap-4 mb-8">
+        <span class="w-full">
+          <span class="p-float-label">
+            <input
+              pInputText
+              inputId="libelleVoie"
+              formControlName="libelleVoie"
+            />
+            <label htmlFor="libelleVoie">Libellé de la voie</label>
+          </span>
+          <control-error [control]="form.get('libelleVoie')" />
+        </span>
+        <span
+          class="w-full"
+          [ngClass]="{
+            hidden: form.get('address.pays')?.value === FRANCE_LABEL
+          }"
+        >
+          <span class="p-float-label">
+            <input
+              pInputText
+              inputId="codePostal"
+              formControlName="codePostal"
+            />
+
+            <label htmlFor="codePostal">Code postal</label>
+          </span>
+          <control-error [control]="form.get('codePostal')" />
+        </span>
+      </div>
+    </div>
+  </p-fieldset>
+
+  <p-fieldset *ngIf="user?.role === Role.Agence">
+    <ng-template pTemplate="header">
+      <div class="flex gap-2">
+        <span class="font-normal">Adresse de facturation</span>
+        <span class="flex align-items-center gap-2">
+          <p-checkbox
+            (onChange)="onCheckboxChange($event)"
+            [binary]="true"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="checkBoxValue"
+          ></p-checkbox>
+          <label class="accent font-normal"
+            >Identique à l'Adresse Physique</label
+          >
+        </span>
+      </div>
+    </ng-template>
+
+    <div formGroupName="billingAddress">
+      <div class="flex gap-4 mb-8">
+        <span class="w-full">
+          <p-dropdown
+            #billingCountryDropdown
+            [options]="countries"
+            optionLabel="countryLabel"
+            optionValue="countryLabel"
+            placeholder="Pays"
+            [filter]="true"
+            [resetFilterOnHide]="true"
+            class="w-full"
+            formControlName="pays"
+            id="pays"
+            (onChange)="
+              onBillingCountryChanged(billingCountryDropdown.selectedOption)
+            "
+          >
+            <!-- Same : Will be done later for Flags -->
+            <!-- <ng-template pTemplate="selectedItem">
+              <div
+                class="flex items-center gap-2 w-full"
+                *ngIf="selectedBillingCountry"
+              >
+                <img
+                  src="assets/styles/flag_placeholder.png"
+                  [class]="
+                    'flag flag-' + selectedBillingCountry.code.toLowerCase()
+                  "
+                  style="width: 20px"
+                />
+                <div>{{ selectedBillingCountry.name }}</div>
+              </div>
+            </ng-template>
+            <ng-template let-country pTemplate="item">
+              <div class="flex items-center gap-2 w-full">
+                <img
+                  src="assets/styles/flag_placeholder.png"
+                  [class]="'flag flag-' + country.code.toLowerCase()"
+                  style="width: 20px"
+                />
+                <div>{{ country.name }}</div>
+              </div>
+            </ng-template> -->
+          </p-dropdown>
+
+          <control-error [control]="form.get('billingAddress.pays')" />
+        </span>
+
+        <span class="w-full">
+          <p-dropdown
+            *ngIf="form.get('billingAddress.pays')?.value === FRANCE_LABEL"
+            [options]="franceCities"
+            optionLabel="codeAndCity"
+            optionValue="codeAndCity"
+            placeholder="Ville"
+            class="w-full"
+            emptyFilterMessage="Aucun résultat trouvé"
+            emptyMessage="Aucun résultat trouvé"
+            [filter]="true"
+            [resetFilterOnHide]="true"
+            formControlName="city"
+            [virtualScroll]="true"
+            [itemSize]="30"
+            #billingFranceCityDrop
+            (onChange)="
+              onBillingFranceCityChanged(
+                billingFranceCityDrop.selectedOption.postCode
+              )
+            "
+          >
+          </p-dropdown>
+
+          <input
+            *ngIf="form.get('billingAddress.pays')?.value !== FRANCE_LABEL"
+            pInputText
+            formControlName="city"
+            placeholder="Ville"
+          />
+
+          <control-error [control]="form.get('billingAddress.city')" />
+        </span>
+      </div>
+
+      <div class="flex gap-4 mb-8">
+        <span class="w-full">
+          <span class="p-float-label">
+            <input
+              pInputText
+              inputId="libelleVoie"
+              formControlName="libelleVoie"
+            />
+            <label htmlFor="libelleVoie">Libellé de la voie</label>
+          </span>
+          <control-error [control]="form.get('billingAddress.libelleVoie')" />
+        </span>
+        <span
+          class="w-full"
+          [ngClass]="{
+            hidden: form.get('billingAddress.pays')?.value === FRANCE_LABEL
+          }"
+        >
+          <span class="p-float-label">
+            <input
+              pInputText
+              inputId="codePostal"
+              formControlName="codePostal"
+            />
+            <label htmlFor="codePostal">Code postal</label>
+          </span>
+          <control-error [control]="form.get('billingAddress.codePostal')" />
+        </span>
+      </div>
+    </div>
+  </p-fieldset>
+
+  <button
+    type="submit"
+    pButton
+    pRipple
+    label="Sauvegarder"
+    class="bg-accent font-thin w-full"
+    (click)="submit()"
+    [loading]="isLoading"
+    [disabled]="!form.dirty"
+  ></button>
+</div>

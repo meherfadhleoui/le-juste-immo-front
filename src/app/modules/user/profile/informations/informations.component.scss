@@ -1,0 +1,36 @@
+:host {
+  .camera {
+    background-color: #d8dadf;
+    font-variation-settings:
+      'FILL' 1,
+      'wght' 100,
+      'GRAD' 0,
+      'opsz' 24;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  ::ng-deep {
+    .p-dropdown,
+    p-fieldset {
+      width: 100%;
+    }
+
+    .p-image {
+      border-radius: 9999px;
+      width: 120px;
+      height: 120px;
+      overflow: hidden;
+      border: 1px solid #ced4da;
+    }
+
+    button[aria-label='Zoom Out'],
+    button[aria-label='Zoom In'],
+    button[aria-label='Rotate Left'],
+    button[aria-label='Rotate Right'] {
+      display: none;
+    }
+  }
+}

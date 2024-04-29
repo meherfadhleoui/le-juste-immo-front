@@ -1,6 +1,4 @@
-import { Country } from '../models/country.model';
-
-export const COUNTRIES: Country[] = [
+export const COUNTRIES = [
   {
     name: 'Afghanistan',
     code: 'AF',

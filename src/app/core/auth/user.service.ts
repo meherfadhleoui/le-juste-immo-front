@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, ReplaySubject, of } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
-import { User } from 'src/app/shared/models/user.model';
+import { User } from 'src/app/shared/models/user.models';
 
 @Injectable({
   providedIn: 'root',
@@ -34,11 +34,20 @@ export class UserService {
     );
   }
 
-  update(user: User): Observable<any> {
-    return this.httpClient.patch<User>('/user', { user }).pipe(
-      map((response) => {
-        this._user.next(response);
-      }),
+  update(userId: string, user: FormData) {
+    return this.httpClient
+      .put<{ message: string; body: User }>(`/user/${userId}`, user)
+      .pipe(
+        tap((response) => {
+          this._user.next(response.body);
+        }),
+      );
+  }
+
+  changePassword(passwords: { currentPassword: string; newPassword: string }) {
+    return this.httpClient.put<{ message: string }>(
+      `/user/password`,
+      passwords,
     );
   }
 

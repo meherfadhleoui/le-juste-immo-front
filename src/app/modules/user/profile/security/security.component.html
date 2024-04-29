@@ -1,0 +1,56 @@
+<form [formGroup]="form" class="flex flex-col gap-10">
+  <span class="w-max m-auto text-xl primary font-semibold"
+    >Changer le mot de passe</span
+  >
+  <span class="w-full">
+    <span class="p-float-label">
+      <p-password
+        inputId="currentPassword"
+        class="w-full"
+        [toggleMask]="true"
+        [feedback]="false"
+        formControlName="currentPassword"
+      ></p-password>
+      <label htmlFor="currentPassword">Mot de passe actuel</label>
+    </span>
+    <control-error [control]="form.get('currentPassword')" />
+  </span>
+
+  <span class="w-full">
+    <span class="p-float-label">
+      <p-password
+        inputId="newPassword"
+        class="w-full"
+        [toggleMask]="true"
+        [feedback]="false"
+        formControlName="newPassword"
+      ></p-password>
+      <label htmlFor="newPassword">Nouveau mot de passe </label>
+    </span>
+    <control-error [control]="form.get('newPassword')" /> </span
+  ><span class="w-full">
+    <span class="p-float-label">
+      <p-password
+        inputId="confirmNewPassword"
+        class="w-full"
+        [toggleMask]="true"
+        [feedback]="false"
+        formControlName="confirmNewPassword"
+      ></p-password>
+      <label htmlFor="confirmNewPassword"
+        >Confirmer le nouveau mot de passe</label
+      >
+    </span>
+    <control-error [control]="form.get('confirmNewPassword')" />
+  </span>
+
+  <button
+    type="submit"
+    pButton
+    pRipple
+    label="Sauvegarder"
+    class="bg-accent w-full"
+    (click)="submit()"
+    [loading]="isLoading"
+  ></button>
+</form>

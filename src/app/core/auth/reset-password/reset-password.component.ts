@@ -40,7 +40,7 @@ export class ResetPasswordComponent implements OnInit {
       ]),
       confirmPassword: this.fb.control('', [
         Validators.required,
-        confirmPasswordValidator,
+        confirmPasswordValidator(),
       ]),
     });
   }

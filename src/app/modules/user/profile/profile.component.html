@@ -1,0 +1,9 @@
+<div class="flex items-start justify-center gap-4 p-4">
+  <p-menu [model]="items"></p-menu>
+
+  <div class="flex-grow self-stretch" style="max-width: 700px">
+    <p-card styleClass="w-full h-full">
+      <router-outlet></router-outlet>
+    </p-card>
+  </div>
+</div>

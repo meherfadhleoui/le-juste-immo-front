@@ -85,18 +85,23 @@
         <div class="flex gap-4 mb-8">
           <span class="w-full">
             <p-dropdown
+              #physicalCountryDropdown
               [options]="countries"
-              optionLabel="name"
-              [showClear]="true"
+              optionLabel="countryLabel"
+              optionValue="countryLabel"
               placeholder="Pays"
-              (onChange)="onPhysicalCountryChanged($event)"
               [filter]="true"
               [resetFilterOnHide]="true"
               class="w-full"
               formControlName="pays"
               id="pays"
+              (onChange)="
+                onPhysicalCountryChanged(physicalCountryDropdown.selectedOption)
+              "
             >
-              <ng-template pTemplate="selectedItem">
+              <!-- TO Integrate Later For Flags -->
+
+              <!-- <ng-template pTemplate="selectedItem">
                 <div
                   class="flex items-center gap-2 w-full"
                   *ngIf="selectedPhysicalCountry"
@@ -120,7 +125,7 @@
                   />
                   <div>{{ country.name }}</div>
                 </div>
-              </ng-template>
+              </ng-template> -->
             </p-dropdown>
 
             <control-error [control]="registerForm.get('address.pays')" />
@@ -128,9 +133,10 @@
 
           <span class="w-full">
             <p-dropdown
-              [options]="selectedPhysicalCountry?.states | stringToObject"
-              optionLabel="value"
-              optionValue="value"
+              *ngIf="registerForm.get('address.pays')?.value === FRANCE_LABEL"
+              [options]="franceCities"
+              optionLabel="codeAndCity"
+              optionValue="codeAndCity"
               placeholder="Ville"
               class="w-full"
               emptyFilterMessage="Aucun résultat trouvé"
@@ -138,7 +144,24 @@
               [filter]="true"
               [resetFilterOnHide]="true"
               formControlName="city"
-            ></p-dropdown>
+              [virtualScroll]="true"
+              [itemSize]="30"
+              #physicalFranceCityDrop
+              (onChange)="
+                onPhysicalFranceCityChanged(
+                  physicalFranceCityDrop.selectedOption.postCode
+                )
+              "
+            >
+            </p-dropdown>
+
+            <input
+              *ngIf="registerForm.get('address.pays')?.value !== FRANCE_LABEL"
+              pInputText
+              formControlName="city"
+              placeholder="Ville"
+            />
+
             <control-error [control]="registerForm.get('address.city')" />
           </span>
         </div>
@@ -155,13 +178,19 @@
             </span>
             <control-error [control]="registerForm.get('libelleVoie')" />
           </span>
-          <span class="w-full">
+          <span
+            class="w-full"
+            [ngClass]="{
+              hidden: registerForm.get('address.pays')?.value === FRANCE_LABEL
+            }"
+          >
             <span class="p-float-label">
               <input
                 pInputText
                 inputId="codePostal"
                 formControlName="codePostal"
               />
+
               <label htmlFor="codePostal">Code postal</label>
             </span>
             <control-error [control]="registerForm.get('codePostal')" />
@@ -190,18 +219,22 @@
         <div class="flex gap-4 mb-8">
           <span class="w-full">
             <p-dropdown
+              #billingCountryDropdown
               [options]="countries"
-              optionLabel="name"
-              [showClear]="true"
+              optionLabel="countryLabel"
+              optionValue="countryLabel"
               placeholder="Pays"
-              (onChange)="onBillingCountryChanged($event)"
               [filter]="true"
               [resetFilterOnHide]="true"
               class="w-full"
               formControlName="pays"
               id="pays"
+              (onChange)="
+                onBillingCountryChanged(billingCountryDropdown.selectedOption)
+              "
             >
-              <ng-template pTemplate="selectedItem">
+              <!-- Same : Will be done later for Flags -->
+              <!-- <ng-template pTemplate="selectedItem">
                 <div
                   class="flex items-center gap-2 w-full"
                   *ngIf="selectedBillingCountry"
@@ -225,7 +258,7 @@
                   />
                   <div>{{ country.name }}</div>
                 </div>
-              </ng-template>
+              </ng-template> -->
             </p-dropdown>
 
             <control-error
@@ -235,9 +268,12 @@
 
           <span class="w-full">
             <p-dropdown
-              [options]="selectedBillingCountry?.states | stringToObject"
-              optionLabel="value"
-              optionValue="value"
+              *ngIf="
+                registerForm.get('billingAddress.pays')?.value === FRANCE_LABEL
+              "
+              [options]="franceCities"
+              optionLabel="codeAndCity"
+              optionValue="codeAndCity"
               placeholder="Ville"
               class="w-full"
               emptyFilterMessage="Aucun résultat trouvé"
@@ -245,7 +281,26 @@
               [filter]="true"
               [resetFilterOnHide]="true"
               formControlName="city"
-            ></p-dropdown>
+              [virtualScroll]="true"
+              [itemSize]="30"
+              #billingFranceCityDrop
+              (onChange)="
+                onBillingFranceCityChanged(
+                  billingFranceCityDrop.selectedOption.postCode
+                )
+              "
+            >
+            </p-dropdown>
+
+            <input
+              *ngIf="
+                registerForm.get('billingAddress.pays')?.value !== FRANCE_LABEL
+              "
+              pInputText
+              formControlName="city"
+              placeholder="Ville"
+            />
+
             <control-error
               [control]="registerForm.get('billingAddress.city')"
             />
@@ -266,7 +321,13 @@
               [control]="registerForm.get('billingAddress.libelleVoie')"
             />
           </span>
-          <span class="w-full">
+          <span
+            class="w-full"
+            [ngClass]="{
+              hidden:
+                registerForm.get('billingAddress.pays')?.value === FRANCE_LABEL
+            }"
+          >
             <span class="p-float-label">
               <input
                 pInputText

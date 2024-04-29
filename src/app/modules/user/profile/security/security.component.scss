@@ -1,0 +1,8 @@
+:host {
+  ::ng-deep .p-password {
+    display: block;
+    input {
+      width: 100%;
+    }
+  }
+}
