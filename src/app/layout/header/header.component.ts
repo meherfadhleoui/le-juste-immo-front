@@ -45,6 +45,7 @@ export class HeaderComponent implements OnInit {
       },
       {
         label: 'Agences',
+        routerLink: ['/agency'],
       },
       {
         label: 'Mes Annonces',

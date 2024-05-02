@@ -23,6 +23,10 @@
       }
     }
 
+    li.p-focus > div {
+      background-color: var(--secondary);
+    }
+
     .create-annonce-btn > * {
       border: none;
       box-shadow: none;

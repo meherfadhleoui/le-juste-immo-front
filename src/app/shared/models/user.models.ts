@@ -5,8 +5,6 @@ export interface User {
   _id: string;
   role: Role;
   email: string;
-  firstName: string;
-  lastName: string;
   phone: string;
   avatar: string;
   address: Address;
@@ -20,9 +18,12 @@ export interface Admin extends User {
 
 export interface Agency extends User {
   role: Role.Agence;
+  nomAgence: string;
   billingAddress: Address;
 }
 
 export interface Particulier extends User {
   role: Role.Particulier;
+  firstName: string;
+  lastName: string;
 }

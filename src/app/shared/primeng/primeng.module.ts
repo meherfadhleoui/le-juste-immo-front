@@ -17,6 +17,7 @@ import { DividerModule } from 'primeng/divider';
 import { TagModule } from 'primeng/tag';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ImageModule } from 'primeng/image';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   exports: [
@@ -38,6 +39,7 @@ import { ImageModule } from 'primeng/image';
     TagModule,
     CheckboxModule,
     ImageModule,
+    PaginatorModule,
   ],
 })
 export class PrimengModule {}

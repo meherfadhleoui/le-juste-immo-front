@@ -17,5 +17,7 @@ export function buildCodeAndCity(postCode: string, locationLabel: string) {
   return postCode + ' - ' + locationLabel;
 }
 
-
-
+export function convertToNumber(value: any): number | null {
+  const parsedValue = parseFloat(value);
+  return !isNaN(parsedValue) ? parsedValue : null;
+}

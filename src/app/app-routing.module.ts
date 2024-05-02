@@ -20,6 +20,14 @@ const routes: Routes = [
           ),
       },
       PROFILE_ROUTE,
+
+      {
+        path: 'agency',
+        loadComponent: () =>
+          import('./modules/user/agency/agency.component').then(
+            (mod) => mod.AgencyComponent,
+          ),
+      },
     ],
   },
 

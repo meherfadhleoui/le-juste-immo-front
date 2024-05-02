@@ -5,14 +5,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { RightAuthPanelComponent } from './components/right-auth-panel/right-auth-panel.component';
 import { ControlErrorComponent } from './components/control-error/control-error.component';
-import { StringToObjectPipe } from './pipes/string-to-object.pipe';
 import { AnnonceCardComponent } from './components/annonce-card/annonce-card.component';
 
 @NgModule({
   declarations: [
     RightAuthPanelComponent,
     ControlErrorComponent,
-    StringToObjectPipe,
     AnnonceCardComponent,
   ],
   imports: [
@@ -30,7 +28,6 @@ import { AnnonceCardComponent } from './components/annonce-card/annonce-card.com
     RightAuthPanelComponent,
     CommonModule,
     ControlErrorComponent,
-    StringToObjectPipe,
     AnnonceCardComponent,
   ],
 })
