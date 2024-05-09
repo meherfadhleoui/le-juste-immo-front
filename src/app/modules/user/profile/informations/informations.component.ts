@@ -9,6 +9,7 @@ import { DataService } from 'src/app/shared/services/data.service';
 import { Country, FranceCity } from 'src/app/shared/models/address.model';
 import {
   FRANCE_LABEL,
+  appendObjectToFormData,
   buildCodeAndCity,
   getFranceCitiesModified,
 } from 'src/app/shared/utils/utils';
@@ -261,19 +262,10 @@ export class InformationsComponent implements OnInit {
 
     const formData = new FormData();
 
-    Object.entries(formValues as Object).forEach(([key, value]) => {
-      if (typeof value === 'object') {
-        formData.append(key, JSON.stringify(value));
-        return;
-      }
-
-      formData.append(key, value);
-    });
-
     if (this.selectedFile && this.imageUrl) {
       formData.append('avatar', this.selectedFile);
     }
-
+    appendObjectToFormData(formData, formValues);
     this._userService.update(this.user._id, formData).subscribe({
       next: (res) => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
