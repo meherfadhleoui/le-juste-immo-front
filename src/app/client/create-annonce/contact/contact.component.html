@@ -1,0 +1,43 @@
+<div class="flex flex-col gap-10 mt-8" [formGroup]="contactForm">
+  <span class="w-full">
+    <span class="p-float-label">
+      <input
+        pInputText
+        inputId="adresseMail"
+        type="email"
+        formControlName="adresseMail"
+        class="w-full"
+      />
+      <label htmlFor="adresseMail">Adresse e-mail</label>
+    </span>
+    <control-error [control]="contactForm.get('adresseMail')" />
+  </span>
+
+  <span class="w-full">
+    <span class="p-float-label">
+      <input
+        pInputText
+        inputId="userName"
+        formControlName="userName"
+        class="w-full"
+      />
+      <label htmlFor="userName">Nom d'utilisateur</label>
+    </span>
+    <control-error [control]="contactForm.get('userName')" />
+  </span>
+
+  <span class="w-full">
+    <span class="p-float-label">
+      <p-inputNumber
+        inputId="telephone"
+        class="w-full"
+        styleClass="w-full"
+        formControlName="telephone"
+        [useGrouping]="false"
+      >
+      </p-inputNumber>
+      <label htmlFor="telephone">Téléphone</label>
+    </span>
+    <control-error [control]="contactForm.get('telephone')" />
+  </span>
+</div>

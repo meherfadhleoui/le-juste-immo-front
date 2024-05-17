@@ -1,0 +1,13 @@
+<app-home-search></app-home-search>
+
+<div class="text-center p-10">
+  <p-tag value="Meilleures" [rounded]="true" styleClass="tag"></p-tag>
+</div>
+
+<div class="cards-container">
+  <app-annonce-card
+    *ngFor="let annonce of annonces"
+    [annonce]="annonce"
+    (click)="navigateToAnnonce(annonce._id)"
+  ></app-annonce-card>
+</div>

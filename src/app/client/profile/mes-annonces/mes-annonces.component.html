@@ -1,0 +1,85 @@
+<div class="flex flex-col-reverse gap-10" *ngIf="mesAnnoces.length">
+  <div
+    class="flex justify-between gap-10 annnoce-container p-4"
+    *ngFor="let annonce of mesAnnoces; let index = index"
+  >
+    <img [src]="annonce.principlePhoto" alt="" class="w-32 h-28" />
+
+    <div class="flex flex-col gap-2 flex-1">
+      <span class="font-semibold text-2xl accent">
+        {{ annonce.titre }}
+      </span>
+      <span class="text-sm font-medium text-blue-500">
+        {{ annonce.typeBien }}
+      </span>
+      <span class="flex gap-2 font-medium text-sm items-center">
+        <span class="material-symbols-outlined pin-drop"> pin_drop </span>
+
+        {{
+          annonce.adresseBien.ville +
+            '-' +
+            annonce.adresseBien.codePostal +
+            '-' +
+            annonce.adresseBien.adresse
+        }}
+      </span>
+      <span class="font-medium flex gap-1 items-center">
+        {{ annonce.prix.montant }}
+
+        <span class="material-symbols-outlined euro"> euro </span>
+      </span>
+    </div>
+
+    <span class="flex items-center justify-center italic">
+      {{ annonce.updatedAt | date: 'mediumDate' : 'fr' }}
+    </span>
+
+    <div
+      class="flex flex-col items-center justify-center gap-2"
+      [ngClass]="
+        isLoading
+          ? 'pointer-events-none opacity-50'
+          : 'pointer-events-auto opacity-100'
+      "
+    >
+      <button
+        pButton
+        icon="pi pi-pencil"
+        class="p-button-rounded p-button-secondary"
+        pTooltip="Modifier"
+      ></button>
+
+      <button
+        pButton
+        [icon]="annonce.activated ? 'pi pi-eye-slash' : 'pi pi-eye'"
+        [pTooltip]="annonce.activated ? 'Désactiver' : 'Activer'"
+        class="p-button-rounded p-button-warning"
+        (click)="
+          annonce.activated
+            ? desactivateAnnonce(annonce._id, index)
+            : activateAnnonce(annonce._id, index)
+        "
+      ></button>
+
+      <button
+        pButton
+        icon="pi pi-trash"
+        class="p-button-rounded p-button-danger"
+        pTooltip="Supprimer"
+        (click)="deleteAnnonce(annonce._id, index)"
+      ></button>
+    </div>
+  </div>
+</div>
+
+<span
+  class="font-semibold primary flex items-center justify-center"
+  *ngIf="!mesAnnoces.length"
+>
+  Aucune annonce n'a été créée jusqu'à présent.
+</span>
+
+<p-confirmDialog
+  [style]="{ width: '50vw' }"
+  rejectButtonStyleClass="p-button-outlined"
+></p-confirmDialog>

@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthRoutingModule } from './core/auth/auth-routing.module';
 import { LayoutComponent } from './layout/layout.component';
-import { PROFILE_ROUTE } from './modules/user/profile/profile-route';
+import { PROFILE_ROUTE } from './client/profile/profile-route';
+import { authGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   // Redirect empty path to '/home'
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  { path: '', pathMatch: 'full', redirectTo: '/home' },
 
   {
     path: '',
@@ -15,7 +16,7 @@ const routes: Routes = [
       {
         path: 'home',
         loadComponent: () =>
-          import('./modules/user/home/home.component').then(
+          import('./client/home/home.component').then(
             (mod) => mod.HomeComponent,
           ),
       },
@@ -24,11 +25,39 @@ const routes: Routes = [
       {
         path: 'agency',
         loadComponent: () =>
-          import('./modules/user/agency/agency.component').then(
+          import('./client/agency/agency.component').then(
             (mod) => mod.AgencyComponent,
           ),
       },
+
+      {
+        path: 'annonce',
+        loadComponent: () =>
+          import('./client/annonce/annonce.component').then(
+            (mod) => mod.AnnonceComponent,
+          ),
+
+        children: [
+          {
+            path: ':id',
+            loadComponent: () =>
+              import('./client/annonce/details/details.component').then(
+                (mod) => mod.DetailsComponent,
+              ),
+          },
+        ],
+      },
     ],
+  },
+
+  {
+    path: 'create-annonce',
+    loadComponent: () =>
+      import('./client/create-annonce/create-annonce.component').then(
+        (mod) => mod.CreateAnnonceComponent,
+      ),
+
+    canActivate: [authGuard],
   },
 
   { path: '**', redirectTo: 'home' },

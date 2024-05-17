@@ -1,0 +1,29 @@
+:host ::ng-deep {
+  .ng-invalid.ng-touched + label {
+    color: #e24c4c;
+  }
+  .p-message-wrapper {
+    flex-wrap: wrap;
+    font-size: 14px;
+  }
+
+  .p-messages {
+    max-width: 450px;
+  }
+
+  .p-message-wrapper > :nth-child(3) {
+    flex-basis: 100%;
+    margin: 10px 0px;
+  }
+
+  ::ng-deep .p-checkbox .p-checkbox-box.p-highlight {
+    background: var(--primary);
+    border: none;
+  }
+
+  .disabled-except-one > div:not(:first-child),
+  .disabled-except-two > div:not(:nth-child(1)):not(:nth-child(2)) {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}

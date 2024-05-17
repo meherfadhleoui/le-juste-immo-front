@@ -6,12 +6,14 @@ import { RouterModule } from '@angular/router';
 import { RightAuthPanelComponent } from './components/right-auth-panel/right-auth-panel.component';
 import { ControlErrorComponent } from './components/control-error/control-error.component';
 import { AnnonceCardComponent } from './components/annonce-card/annonce-card.component';
+import { MediaCardComponent } from './components/media-card/media-card.component';
 
 @NgModule({
   declarations: [
     RightAuthPanelComponent,
     ControlErrorComponent,
     AnnonceCardComponent,
+    MediaCardComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +31,7 @@ import { AnnonceCardComponent } from './components/annonce-card/annonce-card.com
     CommonModule,
     ControlErrorComponent,
     AnnonceCardComponent,
+    MediaCardComponent,
   ],
 })
 export class SharedModule {}

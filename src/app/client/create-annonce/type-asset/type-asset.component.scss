@@ -1,0 +1,13 @@
+.selected {
+  border: 2px solid var(--primary);
+}
+
+.unselected {
+  border: 1px solid #ced4da;
+}
+
+:host {
+  .ng-invalid.ng-touched > div {
+    border-color: #e24c4c;
+  }
+}

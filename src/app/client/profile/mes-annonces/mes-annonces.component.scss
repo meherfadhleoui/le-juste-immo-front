@@ -1,0 +1,26 @@
+:host ::ng-deep {
+  .p-button-rounded {
+    width: 36px;
+    height: 30px;
+  }
+
+  .annnoce-container {
+    box-shadow:
+      0 2px 1px -1px rgba(0, 0, 0, 0.3),
+      0 1px 1px 0 rgba(0, 0, 0, 0.24),
+      0 1px 3px 0 rgba(0, 0, 0, 0.22);
+    border-radius: 6px;
+  }
+
+  .pin-drop {
+    font-variation-settings: 'wght' 500;
+  }
+
+  .euro {
+    font-size: 18px;
+  }
+
+  .p-icon-wrapper {
+    display: none;
+  }
+}

@@ -1,0 +1,28 @@
+:host {
+  ::ng-deep p-inputnumber {
+    .p-inputtext:enabled:focus {
+      box-shadow: none;
+    }
+
+    .p-inputtext {
+      width: 50px;
+    }
+  }
+
+  .radio.ng-invalid.ng-touched label {
+    color: #e24c4c;
+  }
+
+  .card {
+    border: 1px solid #ced4da;
+    &:hover {
+      border-color: var(--primary);
+    }
+  }
+
+  .infos-container {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(2, minmax(0, max-content));
+  }
+}

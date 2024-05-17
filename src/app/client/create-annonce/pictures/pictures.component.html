@@ -1,0 +1,128 @@
+<div class="flex flex-col mt-10 gap-8 h-max">
+  <div class="flex flex-col gap-2">
+    <span class="font-semibold text-sm">Photo Principale *</span>
+    <span class="text-xs">Selectionner une seule photo </span>
+
+    <div
+      class="rounded-3xl w-96 h-72 flex flex-col items-center justify-center cursor-pointer"
+      [ngStyle]="{
+        border:
+          isMainImageTouched && !mainImage
+            ? '1px dashed #e24c4c'
+            : '1px dashed #ced4da'
+      }"
+      (click)="imageInput.click()"
+    >
+      <ng-container *ngIf="!mainImageUrl">
+        <span
+          class="material-symbols-outlined folder"
+          [ngStyle]="{
+            color: isMainImageTouched && !mainImage ? '#e24c4c' : 'black'
+          }"
+        >
+          folder_open
+        </span>
+        <span
+          class="font-semibold text-sm"
+          [ngStyle]="{
+            color: isMainImageTouched && !mainImage ? '#e24c4c' : 'black'
+          }"
+          >Cliquez pour importer votre photo principale</span
+        >
+      </ng-container>
+
+      <p-image
+        *ngIf="mainImageUrl"
+        [src]="mainImageUrl"
+        alt="Image"
+        [preview]="true"
+        [imageStyle]="{ width: '23rem', height: '17rem' }"
+      >
+        <ng-template pTemplate="indicator">
+          <span class="material-symbols-outlined"> edit </span>
+        </ng-template>
+      </p-image>
+    </div>
+    <input
+      #imageInput
+      accept="image/*"
+      (change)="onMainImageUpload($event)"
+      type="file"
+      class="hidden"
+    />
+    <small *ngIf="isMainImageTouched && !mainImage" class="p-error">
+      Ce champ est obligatoire
+    </small>
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <span class="font-semibold text-sm"
+      >Photos Secondaires
+      <span class="font-light"> (facultatif) </span>
+    </span>
+    <span class="text-xs">Selectionnez une ou plusieurs photos </span>
+
+    <div
+      class="rounded-3xl w-96 h-72 flex flex-col items-center justify-center cursor-pointer"
+      [ngStyle]="{
+        border: moreThanTenUploaded
+          ? '1px dashed #e24c4c'
+          : '1px dashed #ced4da'
+      }"
+      (click)="multipleInput.click()"
+      *ngIf="!imagesUrl.length"
+    >
+      <ng-container>
+        <span class="material-symbols-outlined folder"> folder_open </span>
+        <span class="font-semibold text-sm"
+          >Cliquez pour importer vos photos
+        </span>
+      </ng-container>
+
+      <input
+        #multipleInput
+        accept="image/*"
+        (change)="onMultipleImagesUpload($event)"
+        type="file"
+        class="hidden"
+        multiple
+      />
+    </div>
+
+    <div class="flex flex-col gap-4 mt-4" *ngIf="imagesUrl.length">
+      <input
+        #multipleInput
+        accept="image/*"
+        (change)="onMultipleImagesUpload($event)"
+        type="file"
+        class="hidden"
+        multiple
+      />
+      <button
+        pButton
+        icon="pi pi-pencil"
+        style="background-color: #64748b; border: none"
+        (click)="multipleInput.click()"
+      ></button>
+
+      <p-galleria [value]="imagesUrl">
+        <ng-template pTemplate="item" let-item>
+          <img [src]="item.itemImageSrc" style="width: 100%" />
+        </ng-template>
+        <ng-template pTemplate="thumbnail" let-item>
+          <div class="grid grid-nogutter justify-content-center">
+            <img [src]="item.thumbnailImageSrc" />
+          </div>
+        </ng-template>
+      </p-galleria>
+    </div>
+
+    <small *ngIf="moreThanTenUploaded" class="p-error">
+      Vous pouvez importez 10 photos au maximum.
+    </small>
+
+    <small *ngIf="areImagesTouched && images.length < 2" class="p-error">
+      Vous devez importez 2 photos au minimum.
+    </small>
+  </div>
+</div>

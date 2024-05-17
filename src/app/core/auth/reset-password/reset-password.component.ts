@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { confirmPasswordValidator } from 'src/app/shared/Validators/password-match';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthService } from '../auth.service';
-import { MessageService } from 'primeng/api';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -23,7 +23,7 @@ export class ResetPasswordComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private fb: FormBuilder,
     private _authService: AuthService,
-    private messageService: MessageService,
+    private _toastService: ToastService,
     private router: Router,
   ) {}
 
@@ -66,11 +66,7 @@ export class ResetPasswordComponent implements OnInit {
     this._authService.resetPassword(password, token).subscribe({
       next: (res) => {
         this.router.navigate(['/login']);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Succès',
-          detail: res.message,
-        });
+        this._toastService.success(res.message);
       },
       error: () => {
         this.isLoading = false;

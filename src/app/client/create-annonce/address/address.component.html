@@ -1,0 +1,34 @@
+<ng-container [formGroup]="addressForm">
+  <div class="flex flex-col gap-8 mb-8">
+    <span class="w-full">
+      <p-dropdown
+        [options]="franceCities"
+        optionLabel="codeAndCity"
+        optionValue="codeAndCity"
+        placeholder="Ville *"
+        class="w-full"
+        emptyFilterMessage="Aucun résultat trouvé"
+        emptyMessage="Aucun résultat trouvé"
+        [filter]="true"
+        [resetFilterOnHide]="true"
+        formControlName="ville"
+        [virtualScroll]="true"
+        [itemSize]="30"
+        #physicalFranceCityDrop
+        (onChange)="
+          onFranceCityChanged(physicalFranceCityDrop.selectedOption.postCode)
+        "
+      >
+      </p-dropdown>
+
+      <control-error [control]="addressForm.get('ville')" />
+    </span>
+    <span class="w-full">
+      <span class="p-float-label">
+        <input pInputText inputId="adresse" formControlName="adresse" />
+        <label htmlFor="adresse">Adresse *</label>
+      </span>
+      <control-error [control]="addressForm.get('adresse')" />
+    </span>
+  </div>
+</ng-container>

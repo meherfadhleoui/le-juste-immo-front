@@ -18,6 +18,13 @@ import { TagModule } from 'primeng/tag';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ImageModule } from 'primeng/image';
 import { PaginatorModule } from 'primeng/paginator';
+import { StepsModule } from 'primeng/steps';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { GalleriaModule } from 'primeng/galleria';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { MessagesModule } from 'primeng/messages';
+import { CalendarModule } from 'primeng/calendar';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   exports: [
@@ -40,6 +47,13 @@ import { PaginatorModule } from 'primeng/paginator';
     CheckboxModule,
     ImageModule,
     PaginatorModule,
+    StepsModule,
+    RadioButtonModule,
+    GalleriaModule,
+    InputTextareaModule,
+    MessagesModule,
+    CalendarModule,
+    ConfirmDialogModule,
   ],
 })
 export class PrimengModule {}

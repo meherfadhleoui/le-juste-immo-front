@@ -8,13 +8,13 @@ import {
 } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-import { MessageService } from 'primeng/api';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(
     private _authService: AuthService,
-    private messageService: MessageService,
+    private _toastService: ToastService,
   ) {}
 
   intercept(
@@ -31,7 +31,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           const message =
             'Le serveur est actuellement inaccessible. Veuillez réessayer plus tard.';
 
-          this.showError(message);
+          this._toastService.error(message);
           return throwError(() => error);
         }
 
@@ -41,19 +41,11 @@ export class ErrorInterceptor implements HttpInterceptor {
         }
 
         if (!skipErrorMessage) {
-          this.showError(error.error.message);
+          this._toastService.error(error.error.message);
         }
 
         return throwError(() => error);
       }),
     );
-  }
-
-  showError(error: string) {
-    this.messageService.add({
-      severity: 'error',
-      summary: 'Erreur',
-      detail: error,
-    });
   }
 }

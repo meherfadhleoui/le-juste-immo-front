@@ -1,0 +1,17 @@
+:host {
+  ::ng-deep .p-galleria-item {
+    height: 600px;
+    img {
+      height: 100%;
+      object-fit: fill;
+    }
+  }
+
+  .info-shadow {
+    box-shadow:
+      0 2px 1px -1px rgba(0, 0, 0, 0.3),
+      0 1px 1px 0 rgba(0, 0, 0, 0.24),
+      0 1px 3px 0 rgba(0, 0, 0, 0.22);
+    border-radius: 6px;
+  }
+}

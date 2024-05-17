@@ -1,0 +1,25 @@
+:host {
+  .card:hover {
+    border-color: var(--primary);
+  }
+
+  .selected {
+    border: 2px solid var(--primary);
+  }
+
+  .unselected {
+    border: 1px solid #ced4da;
+  }
+
+  ::ng-deep .p-checkbox .p-checkbox-box.p-highlight {
+    background: var(--primary);
+    border: none;
+  }
+}
+
+:host.ng-touched.ng-invalid {
+  ::ng-deep .p-checkbox-box,
+  .card {
+    border-color: #e24c4c;
+  }
+}

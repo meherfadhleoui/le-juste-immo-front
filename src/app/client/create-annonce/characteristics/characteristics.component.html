@@ -1,0 +1,217 @@
+<div class="flex flex-col gap-6" [formGroup]="characteristicsForm">
+  <div class="flex flex-col gap-2 mt-10 w-max">
+    <label class="text-sm font-semibold">Surface habitable * </label>
+    <span class="p-input-icon-right">
+      <i style="top: 41% !important"> m<sup>2</sup> </i>
+      <p-inputNumber
+        styleClass="w-80"
+        class="w-80"
+        [useGrouping]="false"
+        formControlName="superficieTotale"
+      ></p-inputNumber>
+    </span>
+    <control-error [control]="characteristicsForm.get('superficieTotale')" />
+  </div>
+  <ng-container formGroupName="superficiePieces">
+    <div class="flex flex-col gap-2">
+      <label class="text-sm font-semibold">Nombre de pièces * </label>
+      <span class="text-xs"
+        >La cuisine, la salle de bain et les toilettes ne sont pas considérées
+        comme des pièces.
+      </span>
+      <p-inputNumber
+        [showButtons]="true"
+        buttonLayout="horizontal"
+        inputId="horizontal"
+        spinnerMode="horizontal"
+        [step]="1"
+        decrementButtonClass="p-button-secondary"
+        incrementButtonClass="p-button-secondary"
+        incrementButtonIcon="pi pi-plus"
+        decrementButtonIcon="pi pi-minus"
+        [min]="1"
+        [max]="10"
+        formControlName="pieces"
+        (onInput)="onInputNumberChange($event, 'superficiePieces.chambres', 1)"
+      ></p-inputNumber>
+
+      <control-error
+        [control]="characteristicsForm.get('superficiePieces.pieces')"
+      />
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label class="text-sm font-semibold"
+        >Nombre de chambres
+        <span class="font-light"> (facultatif) </span>
+      </label>
+      <p-inputNumber
+        [showButtons]="true"
+        buttonLayout="horizontal"
+        inputId="horizontal"
+        spinnerMode="horizontal"
+        [step]="1"
+        decrementButtonClass="p-button-secondary"
+        incrementButtonClass="p-button-secondary"
+        incrementButtonIcon="pi pi-plus"
+        decrementButtonIcon="pi pi-minus"
+        [min]="0"
+        [max]="10"
+        formControlName="chambres"
+        (onInput)="onInputNumberChange($event, 'superficiePieces.pieces')"
+      ></p-inputNumber>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label class="text-sm font-semibold"
+        >Nombre de salles de bain
+        <span class="font-light"> (facultatif) </span>
+      </label>
+
+      <span class="text-xs">Une pièce avec une baignoire. </span>
+      <p-inputNumber
+        [showButtons]="true"
+        buttonLayout="horizontal"
+        inputId="horizontal"
+        spinnerMode="horizontal"
+        [step]="1"
+        decrementButtonClass="p-button-secondary"
+        incrementButtonClass="p-button-secondary"
+        incrementButtonIcon="pi pi-plus"
+        decrementButtonIcon="pi pi-minus"
+        [min]="0"
+        [max]="10"
+        formControlName="sallesDeBain"
+      ></p-inputNumber>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label class="text-sm font-semibold"
+        >Nombre de salles d'eau
+        <span class="font-light"> (facultatif) </span>
+      </label>
+      <span class="text-xs">Une pièce avec une douche. </span>
+      <p-inputNumber
+        [showButtons]="true"
+        buttonLayout="horizontal"
+        inputId="horizontal"
+        spinnerMode="horizontal"
+        [step]="1"
+        decrementButtonClass="p-button-secondary"
+        incrementButtonClass="p-button-secondary"
+        incrementButtonIcon="pi pi-plus"
+        decrementButtonIcon="pi pi-minus"
+        [min]="0"
+        [max]="10"
+        formControlName="sallesDeau"
+      ></p-inputNumber>
+    </div>
+  </ng-container>
+
+  <div
+    class="flex flex-col gap-2 radio"
+    formGroupName="caracteristiquesSupplementaires"
+  >
+    <span class="text-sm font-semibold"> Votre bien est-il meublé ? * </span>
+
+    <div class="flex align-items-center">
+      <p-radioButton
+        name="meuble"
+        [value]="true"
+        formControlName="meuble"
+        inputId="yes"
+      ></p-radioButton>
+      <label for="yes" class="ml-2 cursor-pointer"
+        >Oui, mon bien est meublé</label
+      >
+    </div>
+    <div class="flex align-items-center">
+      <p-radioButton
+        name="meuble"
+        [value]="false"
+        formControlName="meuble"
+        inputId="no"
+      ></p-radioButton>
+      <label for="no" class="ml-2 cursor-pointer">
+        Non, mon bien n'est pas meublé
+      </label>
+    </div>
+
+    <control-error
+      [control]="
+        characteristicsForm.get('caracteristiquesSupplementaires.meuble')
+      "
+    />
+  </div>
+
+  <span class="font-bold text-lg mt-10 mb-4">
+    Augmentez la visibilité de votre annonce en ajoutant un maximum
+    d’informations
+  </span>
+
+  <span class="font-semibold text-sm"
+    >Espaces extérieurs <span class="font-light"> (facultatif) </span>
+  </span>
+
+  <div class="infos-container">
+    <ng-container
+      *ngFor="let item of outdoorSpaces"
+      [formGroupName]="item.formGroupName"
+    >
+      <app-media-card
+        [name]="item.name"
+        [formControlName]="item.formControlName"
+        [isNumber]="item.isNumber"
+      >
+        <span class="material-symbols-outlined"> {{ item.icon }} </span>
+      </app-media-card>
+    </ng-container>
+  </div>
+
+  <ng-container formGroupName="acces">
+    <span class="font-semibold text-sm"
+      >Accès <span class="font-light"> (facultatif) </span>
+    </span>
+
+    <div class="flex flex-col gap-2">
+      <span class="font-semibold text-sm">Étage de l'appartement </span>
+      <p-inputNumber
+        [showButtons]="true"
+        buttonLayout="horizontal"
+        inputId="horizontal"
+        spinnerMode="horizontal"
+        [step]="1"
+        decrementButtonClass="p-button-secondary"
+        incrementButtonClass="p-button-secondary"
+        incrementButtonIcon="pi pi-plus"
+        decrementButtonIcon="pi pi-minus"
+        formControlName="numeroEtage"
+        [min]="0"
+        (onInput)="onInputNumberChange($event, 'acces.nbrTotalEtages')"
+      ></p-inputNumber>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label class="text-sm font-semibold"
+        >Nombre total d'étages dans l'immeuble
+      </label>
+      <span class="text-xs"
+        >Le rez-de-chaussée n'est pas considéré comme un étage.
+      </span>
+      <p-inputNumber
+        [showButtons]="true"
+        buttonLayout="horizontal"
+        inputId="horizontal"
+        spinnerMode="horizontal"
+        [step]="1"
+        decrementButtonClass="p-button-secondary"
+        incrementButtonClass="p-button-secondary"
+        incrementButtonIcon="pi pi-plus"
+        decrementButtonIcon="pi pi-minus"
+        formControlName="nbrTotalEtages"
+        [min]="0"
+        (onInput)="onInputNumberChange($event, 'acces.numeroEtage', 1)"
+      ></p-inputNumber>
+    </div>
+  </ng-container>
+</div>

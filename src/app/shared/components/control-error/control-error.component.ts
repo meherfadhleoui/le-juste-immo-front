@@ -12,8 +12,10 @@ export class ControlErrorComponent {
   ERROR_MESSAGE: any = {
     required: () => `Ce champ est obligatoire`,
     email: () => 'Veuillez entrer un e-mail valide.',
-    maxlength: (e: any) => `Ce champ contient ${e.requiredLength} maximum`,
-    minlength: (e: any) => `Ce champ contient ${e.requiredLength} minimum`,
+    maxlength: (e: any) =>
+      `Ce champ doit contenir au maximum ${e.requiredLength} caractères`,
+    minlength: (e: any) =>
+      `Ce champ doit contenir au minimum ${e.requiredLength} caractères`,
     PasswordNoMatch: () => 'Les mots de passe ne correspondent pas.',
     default: () => "Message d'erreur non défini pour cette validation.",
   };

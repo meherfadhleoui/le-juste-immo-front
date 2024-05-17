@@ -69,7 +69,12 @@
 
       <span class="w-full">
         <span class="p-float-label">
-          <p-inputNumber inputId="phone" class="w-full" formControlName="phone">
+          <p-inputNumber
+            inputId="phone"
+            class="w-full"
+            formControlName="phone"
+            [useGrouping]="false"
+          >
           </p-inputNumber>
           <label htmlFor="phone">Téléphone</label>
         </span>

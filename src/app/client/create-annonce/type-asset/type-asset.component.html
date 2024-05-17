@@ -1,0 +1,21 @@
+<div class="flex flex-wrap gap-4" [formGroup]="assetTypeForm">
+  <div
+    *ngFor="let type of types"
+    class="px-10 py-8 flex flex-col items-center justify-between cursor-pointer rounded-3xl w-max relative"
+    [ngClass]="selectedType === type ? 'selected' : 'unselected'"
+    (click)="selectRadioButton(type)"
+  >
+    <p-radioButton
+      class="absolute top-2 right-2"
+      formControlName="typeBien"
+      [value]="type"
+      (click)="selectRadioButton(type)"
+    ></p-radioButton>
+
+    <img
+      [src]="'assets/buildings/' + type.toLocaleLowerCase() + '.png'"
+      class="w-20 h-20"
+    />
+    <span class="font-semibold">{{ type }}</span>
+  </div>
+</div>

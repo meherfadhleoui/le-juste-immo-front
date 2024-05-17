@@ -1,0 +1,171 @@
+<div
+  class="flex flex-col gap-1 px-16 py-4 w-full sticky shadow-md bg-secondary z-50"
+  style="top: 68px"
+>
+  <div class="flex gap-3 font-semibold text-lg items-center">
+    <span>
+      {{ annonce?.typeBien }} à
+      {{ annonce?.typeOffre === 'Location' ? 'louer' : 'vendre' }}
+    </span>
+
+    <span class="font-semibold">
+      &#8226; {{ annonce?.adresseBien?.ville | titlecase }} ({{
+        annonce?.adresseBien?.codePostal
+      }})
+    </span>
+
+    <span class="flex gap-2 items-center">
+      &#8226; {{ annonce?.prix?.montant }}
+      <span class="material-symbols-outlined"> euro </span>
+    </span>
+  </div>
+
+  <div class="flex gap-3 font-normal text-sm primary">
+    <span> {{ annonce?.superficiePieces?.pieces }} pièces </span>
+    <span> &#8226; {{ annonce?.superficiePieces?.chambres }} chambres </span>
+    <span>
+      &#8226; Surface de {{ annonce?.superficieTotale }} m<sup>2</sup>
+    </span>
+  </div>
+</div>
+
+<div class="flex gap-2 mx-16 relative" style="height: 600px">
+  <div class="basis-2/3" style="height: calc(100% + 0.5rem)">
+    <img [src]="annonce?.photos?.[0]" class="w-full h-full object-fill" />
+  </div>
+
+  <div class="basis-1/3 h-full flex flex-col gap-2">
+    <img [src]="annonce?.photos?.[1]" class="w-full h-1/2 object-fill" />
+    <img [src]="annonce?.photos?.[2]" class="w-full h-1/2 object-fill" />
+  </div>
+
+  <div class="absolute bottom-4 right-4 flex gap-4">
+    <button
+      pButton
+      label="Voir sur la carte"
+      class="bg-primary secondary"
+      style="border: none"
+    ></button>
+    <button
+      pButton
+      label="Voir toutes les photos"
+      class="bg-primary secondary"
+      style="border: none"
+      (click)="showAllImages()"
+    ></button>
+  </div>
+
+  <div class="flex gap-2 absolute left-0 -bottom-10 primary items-center">
+    <span class="material-symbols-outlined"> photo_camera </span>
+    <span> {{ annonce?.photos?.length }} Photos </span>
+  </div>
+</div>
+
+<div class="flex flex-col gap-2 px-16 mt-20">
+  <div class="font-semibold text-3xl">Description</div>
+
+  <span class="primary"> {{ annonce?.descriptionDetaillee }} </span>
+</div>
+
+<div *ngIf="false" class="flex gap-16 px-32 py-4">
+  <div class="flex flex-col gap-4 w-2/3">
+    <p-galleria [value]="annonce?.photos" [numVisible]="5" [circular]="true">
+      <ng-template pTemplate="item" let-item>
+        <img [src]="item" style="width: 100%" />
+      </ng-template>
+      <ng-template pTemplate="thumbnail" let-item>
+        <div class="grid grid-nogutter justify-content-center">
+          <img [src]="item" />
+        </div>
+      </ng-template>
+    </p-galleria>
+
+    <div class="flex justify-between text-3xl font-semibold">
+      <span>
+        {{ annonce?.typeBien }} à
+        {{ annonce?.typeOffre === 'Location' ? 'louer' : 'vendre' }}
+      </span>
+
+      <span class="flex gap-2 items-center">
+        {{ annonce?.prix?.montant }}
+        <span class="material-symbols-outlined"> euro </span>
+      </span>
+    </div>
+
+    <div class="flex gap-3 font-normal text-base primary">
+      <span> {{ annonce?.superficiePieces?.pieces }} pièces </span>
+      <span> &#8226; {{ annonce?.superficiePieces?.chambres }} chambres </span>
+      <span> &#8226; {{ annonce?.superficieTotale }} m<sup>2</sup> </span>
+      <span>
+        &#8226; Étage
+        {{ annonce?.acces?.numeroEtage }} /
+        {{ annonce?.acces?.nbrTotalEtages }}
+      </span>
+    </div>
+
+    <span class="mt-4 primary">
+      à
+      <span class="font-semibold">
+        {{ annonce?.adresseBien?.ville | titlecase }} ({{
+          annonce?.adresseBien?.codePostal
+        }})
+      </span>
+    </span>
+
+    <div class="mt-8 font-semibold text-3xl">Description</div>
+
+    <span> {{ annonce?.descriptionDetaillee }} </span>
+
+    <div class="mt-8 font-semibold text-3xl">Caractéristiques</div>
+  </div>
+
+  <div class="info-shadow px-4 py-8 flex flex-wrap gap-4 h-max primary w-1/3">
+    <div class="flex flex-col gap-4">
+      <div class="flex gap-2 items-center">
+        <span class="material-symbols-outlined"> person </span>
+
+        <span class="font-medium text-sm">
+          {{ annonce?.userName }}
+        </span>
+      </div>
+
+      <div class="flex gap-2 items-center">
+        <span class="material-symbols-outlined"> mail </span>
+
+        <span class="font-medium text-sm">
+          {{ annonce?.adresseMail }}
+        </span>
+      </div>
+
+      <span class="flex items-center gap-2">
+        <span class="material-symbols-outlined"> call </span>
+        <span class="primary">
+          {{ annonce?.telephone }}
+        </span>
+      </span>
+    </div>
+
+    <img [src]="annonce?.annonceur?.avatar" alt="image" class="w-24 h-24" />
+  </div>
+</div>
+
+<!-- Images -->
+
+<p-galleria
+  [value]="annonce?.photos"
+  [(visible)]="showImages"
+  [containerStyle]="{ 'max-width': '50%' }"
+  [numVisible]="9"
+  [circular]="true"
+  [fullScreen]="true"
+  [showItemNavigators]="true"
+>
+  <ng-template pTemplate="item" let-item>
+    <img [src]="item" style="width: 100%; display: block" />
+  </ng-template>
+  <ng-template pTemplate="thumbnail" let-item>
+    <div class="grid grid-nogutter justify-content-center">
+      <img [src]="item" style="display: block" />
+    </div>
+  </ng-template>
+</p-galleria>

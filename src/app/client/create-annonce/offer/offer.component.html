@@ -1,0 +1,21 @@
+<div class="flex flex-wrap gap-4" [formGroup]="offerForm">
+  <div
+    *ngFor="let item of types"
+    class="py-10 px-14 flex flex-col items-center justify-between cursor-pointer gap-6 rounded-3xl relative"
+    [ngClass]="selectedOffer === item.value ? 'selected' : 'unselected'"
+    (click)="selectRadioButton(item.value)"
+  >
+    <p-radioButton
+      class="absolute top-2 right-2"
+      formControlName="typeOffre"
+      [value]="item.value"
+      (click)="selectRadioButton(item.value)"
+    ></p-radioButton>
+
+    <img
+      [src]="'assets/buildings/' + item.value.toLocaleLowerCase() + '.png'"
+      class="w-20 h-20"
+    />
+    <span class="font-semibold">{{ item.name }}</span>
+  </div>
+</div>

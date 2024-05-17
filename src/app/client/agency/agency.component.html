@@ -1,0 +1,99 @@
+<div class="shadow-md pb-10">
+  <h1 class="text-center primary text-4xl font-semibold mb-8">
+    Recherche des agences
+  </h1>
+  <div
+    class="search-container flex gap-2 items-center justify-center flex-wrap"
+    (keyup.enter)="getAgencies()"
+  >
+    <input
+      type="text"
+      pInputText
+      placeholder="Nom de l'agence"
+      class="search-input"
+      [(ngModel)]="filters.nomAgence"
+      (ngModelChange)="updateQueryParams()"
+    />
+
+    <p-dropdown
+      [options]="countries"
+      optionLabel="countryLabel"
+      optionValue="countryLabel"
+      placeholder="Pays"
+      emptyFilterMessage="Aucun résultat trouvé"
+      emptyMessage="Aucun résultat trouvé"
+      [filter]="true"
+      [resetFilterOnHide]="true"
+      [showClear]="true"
+      styleClass="search-dropdown"
+      [(ngModel)]="filters.address.pays"
+      (ngModelChange)="updateQueryParams()"
+    ></p-dropdown>
+
+    <input
+      type="text"
+      pInputText
+      placeholder="Ville"
+      class="search-input"
+      [(ngModel)]="filters.address.city"
+      (ngModelChange)="updateQueryParams()"
+    />
+    <input
+      type="text"
+      pInputText
+      placeholder="Code postale"
+      class="search-input"
+      [(ngModel)]="filters.address.codePostal"
+      (ngModelChange)="updateQueryParams()"
+    />
+
+    <button
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-search"
+      class="p-button-rounded bg-accent"
+      (click)="getAgencies()"
+      [loading]="isLoading"
+    ></button>
+  </div>
+</div>
+
+<div *ngIf="agencies.length !== 0" class="agency-card-container p-3">
+  <p-card
+    [header]="agency.nomAgence | titlecase"
+    [style]="{ width: '100%', cursor: 'pointer' }"
+    *ngFor="let agency of agencies"
+  >
+    <ng-template pTemplate="header">
+      <img alt="Card" [src]="agency.avatar" class="object-contain h-52 w-40" />
+    </ng-template>
+
+    <div class="flex items-center gap-2 font-medium text-sm">
+      <i class="pi pi-map-marker accent" style="font-size: 1.2rem"></i>
+      <span>{{
+        agency.address.pays +
+          ' ' +
+          agency.address.city +
+          ' ' +
+          agency.address.codePostal
+      }}</span>
+    </div>
+  </p-card>
+</div>
+
+<div
+  *ngIf="!isLoading && agencies.length === 0"
+  class="text-center accent font-semibold text-lg p-10"
+>
+  Aucune agence ne correspond à votre recherche
+</div>
+
+<p-paginator
+  (onPageChange)="onPageChange($event)"
+  [first]="first"
+  [rows]="limit"
+  [rowsPerPageOptions]="[10, 20, 30]"
+  [totalRecords]="totalRecords"
+  styleClass="text-center"
+></p-paginator>
