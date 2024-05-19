@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { PIcon } from 'src/app/shared/enums/icons.enum';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
@@ -22,19 +23,19 @@ export class ProfileComponent implements OnInit {
     this.items = [
       {
         label: 'Informations personnelles',
-        icon: 'pi pi-cog',
+        icon: PIcon.cog,
         styleClass: 'divider',
         routerLink: ['/profile/informations'],
       },
       {
         label: 'Mes annonces',
-        icon: 'pi pi-building',
+        icon: PIcon.building,
         styleClass: 'divider',
         routerLink: ['/profile/mes-annonces'],
       },
       {
         label: 'Changer le mot de passe',
-        icon: 'pi pi-lock',
+        icon: PIcon.lock,
         routerLink: ['/profile/security'],
       },
     ];

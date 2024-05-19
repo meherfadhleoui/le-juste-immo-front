@@ -6,7 +6,7 @@
       <span class="accent text-base font-semibold"> {{ annonce.titre }} </span>
 
       <div class="flex items-center gap-2 font-medium text-sm">
-        <i class="pi pi-map-marker" style="font-size: 1.2rem"></i>
+        <icon [name]="GIcon.position" />
         <span>{{
           annonce.adresseBien.ville +
             ' - ' +
@@ -21,31 +21,30 @@
   <div class="flex flex-col gap-3 text-xs">
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-2">
-        <span class="material-symbols-outlined accent"> crop_square </span>
+        <icon [name]="GIcon.square" styleClass="accent" />
         <span> {{ annonce.superficieTotale }} </span>
         <span class=""> m<sup>2</sup> </span>
       </div>
       <div class="flex items-center gap-2">
-        <span class="material-symbols-outlined accent"> bed </span>
+        <icon [name]="GIcon.chambre" styleClass="accent" />
         <span> {{ annonce.superficiePieces.chambres }} Chambres </span>
       </div>
     </div>
     <div class="flex items-center gap-2">
-      <span class="material-symbols-outlined accent"> shower </span>
-
-      <span> {{ annonce.superficiePieces.sallesDeBain }} Salles de bain </span>
+      <icon [name]="GIcon.sallesDeau" styleClass="accent" />
+      <span> {{ annonce.superficiePieces.sallesDeau }} Salles d'eau </span>
     </div>
 
     <p-divider></p-divider>
 
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-2">
-        <span class="material-symbols-outlined"> person </span>
+        <icon [name]="GIcon.person" />
         <span>{{ 'Maher fadhlaoui' | titlecase }}</span>
       </div>
 
       <div class="flex items-center gap-2">
-        <span class="material-symbols-outlined"> calendar_month </span>
+        <icon [name]="GIcon.calendar" />
         <span>{{ annonce.createdAt | date: 'mediumDate' : 'fr' }}</span>
       </div>
     </div>
@@ -53,7 +52,7 @@
     <div
       class="flex items-center justify-center gap-2 cursor-pointer mt-2 font-semibold"
     >
-      <span class="material-symbols-outlined accent"> pin_drop </span>
+      <icon [name]="GIcon.pin_drop" styleClass="accent" />
       <span class="">Sur la carte</span>
     </div>
   </div>

@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/core/auth/auth.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/auth/user.service';
 import { User } from '../../shared/models/user.models';
+import { PIcon } from 'src/app/shared/enums/icons.enum';
 
 @Component({
   selector: 'app-header',
@@ -19,6 +20,7 @@ export class HeaderComponent implements OnInit {
   profileMenu: MenuItem[] = [];
   user!: User;
   isAuthenticated!: boolean;
+  PIcon = PIcon;
 
   constructor(
     private router: Router,
@@ -61,13 +63,13 @@ export class HeaderComponent implements OnInit {
     this.profileMenu = [
       {
         label: 'Profile',
-        icon: 'pi pi-user',
+        icon: PIcon.user,
         visible: this.isAuthenticated,
         routerLink: ['/profile'],
       },
       {
         label: 'Déconnexion',
-        icon: 'pi pi-sign-out',
+        icon: PIcon.sign_out,
         command: () => {
           this._authService.signOut();
         },
@@ -75,7 +77,7 @@ export class HeaderComponent implements OnInit {
       },
       {
         label: 'Connexion',
-        icon: 'pi pi-sign-in',
+        icon: PIcon.sign_in,
         command: () => {
           this.router.navigate(['/login']);
         },
@@ -83,7 +85,7 @@ export class HeaderComponent implements OnInit {
       },
       {
         label: 'Insription',
-        icon: 'pi pi-user-plus',
+        icon: PIcon.user_plus,
         command: () => {
           this.router.navigate(['/register']);
         },

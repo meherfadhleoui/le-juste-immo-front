@@ -8,6 +8,7 @@ import { PaginatorState } from 'primeng/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { convertToNumber } from 'src/app/shared/utils/utils';
 import { AgencyFilter } from 'src/app/shared/models/filter.model';
+import { GIcon, PIcon } from 'src/app/shared/enums/icons.enum';
 
 @Component({
   selector: 'app-agency',
@@ -19,6 +20,8 @@ import { AgencyFilter } from 'src/app/shared/models/filter.model';
 export class AgencyComponent implements OnInit {
   countries: Country[] = [];
   agencies: Agency[] = [];
+  GIcon = GIcon;
+  PIcon = PIcon;
 
   page: number = 0;
   limit: number = 10;
@@ -92,8 +95,6 @@ export class AgencyComponent implements OnInit {
     if (params.address) {
       this.filters.address = JSON.parse(params.address);
     }
-
-    const firstValue = '';
   }
 
   updateQueryParams() {

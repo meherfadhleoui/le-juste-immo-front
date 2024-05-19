@@ -1,5 +1,6 @@
 import { Component, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { PIcon } from '../../enums/icons.enum';
 
 @Component({
   selector: 'app-media-card',
@@ -18,6 +19,7 @@ export class MediaCardComponent implements ControlValueAccessor {
   @Input() name = '';
   @Input() isNumber: boolean | undefined = false;
   number = 0;
+  PIcon = PIcon;
 
   onChange(value: any): void {}
   onTouched(): void {}

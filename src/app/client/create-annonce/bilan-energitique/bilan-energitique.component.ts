@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Message } from 'primeng/api';
+import { PIcon } from 'src/app/shared/enums/icons.enum';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
@@ -21,7 +22,7 @@ export class BilanEnergitiqueComponent implements OnInit {
 
   messages: Message[] = [
     {
-      icon: 'pi pi-info-circle',
+      icon: PIcon.info,
       severity: 'info',
       summary: 'Renseignez votre diagnostic après publication',
       detail:
@@ -29,7 +30,7 @@ export class BilanEnergitiqueComponent implements OnInit {
     },
 
     {
-      icon: 'pi pi-info-circle',
+      icon: PIcon.info,
       severity: 'info',
       summary: 'Communiquez votre DPE pour plus de transparence',
       detail:
@@ -37,7 +38,7 @@ export class BilanEnergitiqueComponent implements OnInit {
     },
 
     {
-      icon: 'pi pi-exclamation-triangle',
+      icon: PIcon.warn,
       severity: 'warn',
       summary: 'Etes-vous sûr de ne pas être soumis au DPE ?',
       detail:

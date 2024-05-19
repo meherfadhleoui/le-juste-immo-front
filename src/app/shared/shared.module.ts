@@ -7,6 +7,7 @@ import { RightAuthPanelComponent } from './components/right-auth-panel/right-aut
 import { ControlErrorComponent } from './components/control-error/control-error.component';
 import { AnnonceCardComponent } from './components/annonce-card/annonce-card.component';
 import { MediaCardComponent } from './components/media-card/media-card.component';
+import { IconComponent } from './components/icon/icon.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MediaCardComponent } from './components/media-card/media-card.component
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    IconComponent,
   ],
   exports: [
     PrimengModule,
@@ -32,6 +34,7 @@ import { MediaCardComponent } from './components/media-card/media-card.component
     ControlErrorComponent,
     AnnonceCardComponent,
     MediaCardComponent,
+    IconComponent,
   ],
 })
 export class SharedModule {}

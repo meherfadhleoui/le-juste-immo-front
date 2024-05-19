@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Annonce } from '../../models/annonce.model';
+import { GIcon } from '../../enums/icons.enum';
 
 @Component({
   selector: 'app-annonce-card',
@@ -8,4 +9,5 @@ import { Annonce } from '../../models/annonce.model';
 })
 export class AnnonceCardComponent {
   @Input() annonce!: Annonce;
+  GIcon = GIcon;
 }

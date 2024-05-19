@@ -21,6 +21,7 @@ import {
   FRANCE_LABEL,
   getFranceCitiesModified,
 } from 'src/app/shared/utils/utils';
+import { PIcon } from 'src/app/shared/enums/icons.enum';
 
 @Component({
   selector: 'app-register',
@@ -35,8 +36,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   Role = Role;
   selectedRole: Role = Role.Particulier;
   registerRoleOptions: SelectItem[] = [
-    { label: Role.Particulier, value: Role.Particulier, icon: 'pi pi-user' },
-    { label: Role.Agence, value: Role.Agence, icon: 'pi pi-building' },
+    { label: Role.Particulier, value: Role.Particulier, icon: PIcon.user },
+    { label: Role.Agence, value: Role.Agence, icon: PIcon.building },
   ];
 
   countries: Country[] = [];

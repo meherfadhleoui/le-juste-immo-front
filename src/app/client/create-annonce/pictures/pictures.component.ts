@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GIcon, PIcon } from 'src/app/shared/enums/icons.enum';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
@@ -13,6 +14,8 @@ export class PicturesComponent implements OnInit {
   mainImageUrl?: string = '';
   images: any[] = [];
   imagesUrl: any[] = [];
+  GIcon = GIcon;
+  PIcon = PIcon;
 
   isMainImageTouched = false;
   areImagesTouched = false;

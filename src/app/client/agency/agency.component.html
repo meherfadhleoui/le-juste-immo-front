@@ -51,7 +51,7 @@
       pButton
       pRipple
       type="button"
-      icon="pi pi-search"
+      [icon]="PIcon.search"
       class="p-button-rounded bg-accent"
       (click)="getAgencies()"
       [loading]="isLoading"
@@ -70,7 +70,8 @@
     </ng-template>
 
     <div class="flex items-center gap-2 font-medium text-sm">
-      <i class="pi pi-map-marker accent" style="font-size: 1.2rem"></i>
+      <icon [name]="GIcon.position" styleClass="accent" />
+
       <span>{{
         agency.address.pays +
           ' ' +

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
 import { switchMap } from 'rxjs';
 import { UserService } from 'src/app/core/auth/user.service';
+import { PIcon } from 'src/app/shared/enums/icons.enum';
 import { Annonce } from 'src/app/shared/models/annonce.model';
 import { AnnonceService } from 'src/app/shared/services/annonce.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
@@ -17,6 +18,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 })
 export class MesAnnoncesComponent implements OnInit {
   mesAnnoces: Annonce[] = [];
+  PIcon = PIcon;
 
   isLoading = false;
 
@@ -43,7 +45,8 @@ export class MesAnnoncesComponent implements OnInit {
       });
   }
 
-  activateAnnonce(id: string, index: number) {
+  activateAnnonce(event: MouseEvent, id: string, index: number) {
+    event.stopPropagation();
     this.confirmationService.confirm({
       message: "Etes-vous sure de vouloir activer l'annonce ?",
       ...this.comfirmProperties(),
@@ -64,7 +67,8 @@ export class MesAnnoncesComponent implements OnInit {
     });
   }
 
-  desactivateAnnonce(id: string, index: number) {
+  desactivateAnnonce(event: MouseEvent, id: string, index: number) {
+    event.stopPropagation();
     this.confirmationService.confirm({
       message: "Etes-vous sure de vouloir désactiver l'annonce ?",
       ...this.comfirmProperties(),
@@ -85,7 +89,8 @@ export class MesAnnoncesComponent implements OnInit {
     });
   }
 
-  deleteAnnonce(id: string, index: number) {
+  deleteAnnonce(event: MouseEvent, id: string, index: number) {
+    event.stopPropagation();
     this.confirmationService.confirm({
       message: 'Etes-vous sure de vouloir supprimer ?',
       ...this.comfirmProperties(),
@@ -105,10 +110,14 @@ export class MesAnnoncesComponent implements OnInit {
     });
   }
 
+  editAnnonce(event: MouseEvent, id: string, index: number) {
+    event.stopPropagation();
+  }
+
   comfirmProperties() {
     return {
       header: 'Confirmation',
-      icon: 'pi pi-exclamation-triangle',
+      icon: PIcon.warn,
       acceptLabel: 'Oui',
       rejectLabel: 'Non',
     };

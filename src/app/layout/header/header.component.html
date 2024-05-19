@@ -21,7 +21,7 @@
         shape="circle"
         (click)="menu.toggle($event)"
         styleClass="cursor-pointer ml-2 avatar-icon"
-        [icon]="!isAuthenticated ? 'pi pi-user' : ''"
+        [icon]="!isAuthenticated ? PIcon.user : ''"
       ></p-avatar>
       <p-menu
         #menu

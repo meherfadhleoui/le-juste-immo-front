@@ -1,7 +1,11 @@
-<div class="flex flex-col-reverse gap-10" *ngIf="mesAnnoces.length">
+<div
+  class="flex flex-col-reverse gap-10 cursor-pointer"
+  *ngIf="mesAnnoces.length"
+>
   <div
     class="flex justify-between gap-10 annnoce-container p-4"
     *ngFor="let annonce of mesAnnoces; let index = index"
+    [routerLink]="'/annonce/' + annonce._id"
   >
     <img [src]="annonce.principlePhoto" alt="" class="w-32 h-28" />
 
@@ -44,29 +48,30 @@
     >
       <button
         pButton
-        icon="pi pi-pencil"
+        [icon]="PIcon.edit"
         class="p-button-rounded p-button-secondary"
         pTooltip="Modifier"
+        (click)="editAnnonce($event, annonce._id, index)"
       ></button>
 
       <button
         pButton
-        [icon]="annonce.activated ? 'pi pi-eye-slash' : 'pi pi-eye'"
+        [icon]="annonce.activated ? PIcon.eye_slash : PIcon.eye"
         [pTooltip]="annonce.activated ? 'Désactiver' : 'Activer'"
         class="p-button-rounded p-button-warning"
         (click)="
           annonce.activated
-            ? desactivateAnnonce(annonce._id, index)
-            : activateAnnonce(annonce._id, index)
+            ? desactivateAnnonce($event, annonce._id, index)
+            : activateAnnonce($event, annonce._id, index)
         "
       ></button>
 
       <button
         pButton
-        icon="pi pi-trash"
+        [icon]="PIcon.trash"
         class="p-button-rounded p-button-danger"
         pTooltip="Supprimer"
-        (click)="deleteAnnonce(annonce._id, index)"
+        (click)="deleteAnnonce($event, annonce._id, index)"
       ></button>
     </div>
   </div>

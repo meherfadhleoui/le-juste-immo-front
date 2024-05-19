@@ -2,6 +2,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  gap: 40px;
 
   .header {
     position: fixed;
@@ -12,10 +13,10 @@
   }
 
   .content {
-    margin-top: 110px;
+    margin-top: 70px;
   }
 
   .footer {
-    margin-top: 40px;
+    margin-top: auto;
   }
 }

@@ -39,7 +39,7 @@
         [imageStyle]="{ width: '23rem', height: '17rem' }"
       >
         <ng-template pTemplate="indicator">
-          <span class="material-symbols-outlined"> edit </span>
+          <icon [name]="GIcon.edit" />
         </ng-template>
       </p-image>
     </div>
@@ -100,7 +100,7 @@
       />
       <button
         pButton
-        icon="pi pi-pencil"
+        [icon]="PIcon.edit"
         style="background-color: #64748b; border: none"
         (click)="multipleInput.click()"
       ></button>

@@ -38,7 +38,12 @@
     padding: 20px;
     justify-items: center !important;
     grid-auto-rows: 1fr;
+  }
 
-
+  .p-card {
+    height: 100%;
+    .p-card-title {
+      font-size: 1rem;
+    }
   }
 }

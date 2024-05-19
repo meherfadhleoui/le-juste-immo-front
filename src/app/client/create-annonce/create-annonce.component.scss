@@ -1,6 +1,6 @@
 :host ::ng-deep {
   .sidebar {
-    background-color: rgba(76, 158, 108, 0.1);
+    background-color: var(--accent-opacity-10);
     flex: 0 0 25%;
     position: fixed;
     top: 0;
