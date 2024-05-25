@@ -31,21 +31,11 @@ const routes: Routes = [
       },
 
       {
-        path: 'annonce',
+        path: 'annonce/:id',
         loadComponent: () =>
-          import('./client/annonce/annonce.component').then(
-            (mod) => mod.AnnonceComponent,
+          import('./client/annonce-viewer/annonce-viewer.component').then(
+            (mod) => mod.AnnonceViewerComponent,
           ),
-
-        children: [
-          {
-            path: ':id',
-            loadComponent: () =>
-              import('./client/annonce/details/details.component').then(
-                (mod) => mod.DetailsComponent,
-              ),
-          },
-        ],
       },
     ],
   },
@@ -53,11 +43,22 @@ const routes: Routes = [
   {
     path: 'create-annonce',
     loadComponent: () =>
-      import('./client/create-annonce/create-annonce.component').then(
+      import('./client/annonce/annonce.component').then(
         (mod) => mod.CreateAnnonceComponent,
       ),
 
     canActivate: [authGuard],
+  },
+
+  {
+    path: 'edit-annonce/:id',
+    loadComponent: () =>
+      import('./client/annonce/annonce.component').then(
+        (mod) => mod.CreateAnnonceComponent,
+      ),
+
+    canActivate: [authGuard],
+    data: { isEdit: true },
   },
 
   { path: '**', redirectTo: 'home' },

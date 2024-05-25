@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { switchMap } from 'rxjs';
 import { UserService } from 'src/app/core/auth/user.service';
@@ -27,6 +28,7 @@ export class MesAnnoncesComponent implements OnInit {
     private _userService: UserService,
     private confirmationService: ConfirmationService,
     private _toastService: ToastService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -110,8 +112,9 @@ export class MesAnnoncesComponent implements OnInit {
     });
   }
 
-  editAnnonce(event: MouseEvent, id: string, index: number) {
+  editAnnonce(event: MouseEvent, id: string) {
     event.stopPropagation();
+    this.router.navigate([`/edit-annonce/${id}`]);
   }
 
   comfirmProperties() {

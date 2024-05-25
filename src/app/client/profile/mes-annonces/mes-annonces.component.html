@@ -28,7 +28,7 @@
         }}
       </span>
       <span class="font-medium flex gap-1 items-center">
-        {{ annonce.prix.montant }}
+        {{ annonce.informationsFinanciers.montant }}
 
         <span class="material-symbols-outlined euro"> euro </span>
       </span>
@@ -51,7 +51,7 @@
         [icon]="PIcon.edit"
         class="p-button-rounded p-button-secondary"
         pTooltip="Modifier"
-        (click)="editAnnonce($event, annonce._id, index)"
+        (click)="editAnnonce($event, annonce._id)"
       ></button>
 
       <button

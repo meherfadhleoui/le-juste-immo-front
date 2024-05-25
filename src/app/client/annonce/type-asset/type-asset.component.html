@@ -1,0 +1,13 @@
+<ng-container [formGroup]="assetTypeForm">
+  <p-dropdown
+    [options]="types"
+    placeholder="Type du bien"
+    emptyFilterMessage="Aucun résultat trouvé"
+    emptyMessage="Aucun résultat trouvé"
+    [filter]="true"
+    [showClear]="false"
+    formControlName="typeBien"
+    class="w-full"
+    styleClass="w-full"
+  ></p-dropdown>
+</ng-container>

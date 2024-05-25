@@ -15,6 +15,13 @@ export class AnnonceService {
     );
   }
 
+  update(id: string, annonce: FormData) {
+    return this.httpClient.put<{ message: string; body: Annonce }>(
+      `/annonce/${id}`,
+      annonce,
+    );
+  }
+
   get() {
     const params = new HttpParams().append('showLoader', true);
     return this.httpClient.get<{ totalRecords: number; body: Annonce[] }>(

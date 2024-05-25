@@ -5,9 +5,7 @@ import { FormGroup } from '@angular/forms';
   providedIn: 'root',
 })
 export class ScrollService {
-  private extraSpace = 60; // Extra space to top
-
-  scrollToFirstInvalidElement(form: FormGroup): void {
+  scrollToFirstInvalidElement(form: FormGroup, extraSpace: number): void {
     const invalidControl = this.findFirstInvalidControl(form);
     if (invalidControl) {
       const invalidElement = document.querySelector(
@@ -18,7 +16,7 @@ export class ScrollService {
         const scrollTopPosition =
           invalidElement.getBoundingClientRect().top +
           window.pageYOffset -
-          this.extraSpace;
+          extraSpace;
 
         window.scrollTo({ top: scrollTopPosition, behavior: 'smooth' });
       }

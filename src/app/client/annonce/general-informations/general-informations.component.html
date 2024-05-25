@@ -1,0 +1,35 @@
+<div class="flex flex-col gap-6" [formGroup]="form">
+  <div class="flex flex-col gap-2">
+    <label class="text-sm font-semibold">Titre * </label>
+
+    <input type="text" pInputText formControlName="titre" class="w-1/2" />
+
+    <control-error [control]="form.get('titre')" />
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <label class="text-sm font-semibold">Etat * </label>
+    <p-dropdown
+      formControlName="etat"
+      placeholder="Précisez l'état du bien"
+      [options]="etats"
+      class="w-1/2"
+      styleClass="w-full"
+      emptyFilterMessage="Aucun résultat trouvé"
+      emptyMessage="Aucun résultat trouvé"
+    ></p-dropdown>
+    <control-error [control]="form.get('etat')" />
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <label class="text-sm font-semibold">Description détaillée * </label>
+    <textarea
+      rows="10"
+      pInputTextarea
+      formControlName="descriptionDetaillee"
+      class="w-1/2"
+    ></textarea>
+
+    <control-error [control]="form.get('descriptionDetaillee')" />
+  </div>
+</div>

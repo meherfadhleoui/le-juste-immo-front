@@ -1,4 +1,3 @@
-import { Address } from './address.model';
 import { User } from './user.models';
 
 export interface Annonce {
@@ -18,17 +17,20 @@ export interface Annonce {
   exported: boolean;
   createdAt: Date;
   updatedAt: Date;
-  annonceur: User;
+  annonceur?: User;
   adresseBien: AdresseBien;
-  prix: Prix;
   superficieTotale: number;
   adresseMail: string;
   userName: string;
   telephone: string;
   descriptionDetaillee: string;
+  informationsFinanciers: InformationsFinanciers;
+  honorairesAgence: HonorairesAgence;
+  dpe: DPE;
+  etat: string;
 }
 
-interface AdresseBien {
+export interface AdresseBien {
   ville: string;
   adresse: string;
   codePostal: string;
@@ -60,6 +62,25 @@ export interface SuperficiePieces {
   garage: number;
 }
 
-export interface Prix {
+export interface InformationsFinanciers {
   montant: number;
+  mention: string;
+  chargesCopropriete?: number;
+  taxeFonciere?: number;
+  depotDeGarantie?: number;
+}
+
+export interface HonorairesAgence {
+  montant: number;
+  Acquéreur: number;
+  Vendeur: number;
+  fraisEtatLieu?: number;
+}
+
+export interface DPE {
+  consommationEnergetique: number;
+  emissionsGaz: number;
+  dateRealisation: Date;
+  state: number;
+  empty: boolean;
 }

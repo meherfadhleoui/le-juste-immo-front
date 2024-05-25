@@ -18,7 +18,6 @@ import { TagModule } from 'primeng/tag';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ImageModule } from 'primeng/image';
 import { PaginatorModule } from 'primeng/paginator';
-import { StepsModule } from 'primeng/steps';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { GalleriaModule } from 'primeng/galleria';
 import { InputTextareaModule } from 'primeng/inputtextarea';
@@ -47,7 +46,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     CheckboxModule,
     ImageModule,
     PaginatorModule,
-    StepsModule,
     RadioButtonModule,
     GalleriaModule,
     InputTextareaModule,

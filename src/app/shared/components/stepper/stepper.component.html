@@ -1,0 +1,18 @@
+<div class="process">
+  <ul>
+    <li
+      class="step cursor-pointer"
+      *ngFor="let step of items; let index = index"
+      [ngClass]="
+        index === activeIndex
+          ? 'current'
+          : activeIndex > index
+            ? 'completed'
+            : ''
+      "
+      (click)="click(index)"
+    >
+      <div class="name">{{ step.label }}</div>
+    </li>
+  </ul>
+</div>

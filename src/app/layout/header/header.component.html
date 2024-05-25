@@ -1,19 +1,21 @@
 <p-menubar [model]="menuItems">
   <ng-template pTemplate="start">
-    <img
-      src="assets/small-logo.png"
-      [routerLink]="'/home'"
-      class="w-10 h-10 mr-20 ml-2 cursor-pointer"
-    />
+    <a [routerLink]="'/home'">
+      <img
+        src="assets/small-logo.png"
+        class="w-10 h-10 mr-20 ml-2 cursor-pointer"
+      />
+    </a>
   </ng-template>
   <ng-template pTemplate="end">
     <div class="flex items-center justify-center">
-      <p-button
-        label="Créer une annonce"
-        styleClass="p-button-link font-light accent"
-        class="create-annonce-btn"
-        [routerLink]="'/create-annonce'"
-      ></p-button>
+      <a [routerLink]="'/create-annonce'">
+        <p-button
+          label="Créer une annonce"
+          styleClass="p-button-link font-light accent"
+          class="create-annonce-btn"
+        ></p-button>
+      </a>
 
       <p-avatar
         [image]="isAuthenticated ? user.avatar : ''"

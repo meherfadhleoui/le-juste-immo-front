@@ -52,6 +52,7 @@ export class HeaderComponent implements OnInit {
       {
         label: 'Mes Annonces',
         visible: this.isAuthenticated,
+        routerLink: ['/profile/mes-annonces'],
       },
       {
         label: 'Contact',

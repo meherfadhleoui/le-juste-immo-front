@@ -1,1 +1,136 @@
-<router-outlet></router-outlet>
+<div class="flex gap-4 flex-row">
+  <div class="flex flex-col gap-10 w-1/4 min-h-screen p-10 sidebar">
+    <a [routerLink]="'/home'">
+      <img
+        src="assets/small-logo.png"
+        class="w-14 h-14 mr-20 ml-2 cursor-pointer"
+      />
+    </a>
+
+    <stepper
+      [activeIndex]="activeIndex"
+      (onStepItemClick)="onStepItemClick($event)"
+      [items]="items"
+    />
+  </div>
+
+  <div
+    class="flex flex-col gap-20 w-3/4 p-10 flex-1 relative"
+    style="margin-left: 25%"
+  >
+    <div
+      class="flex justify-between items-center sticky top-0 z-50 shadow-lg bg-secondary -m-10 px-10 py-2"
+    >
+      <span class="font-semibold black text-lg" style="color: #015c9f">
+        {{ isEdit ? 'Modifier ' : 'Créer' }} votre annonce
+      </span>
+
+      <button
+        pButton
+        type="button"
+        label="Quitter"
+        class="p-button-text primary"
+        [routerLink]="'/home'"
+      ></button>
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <span class="text-sm font-semibold primary"
+        >Étape {{ activeIndex + 1 }} sur {{ items.length }}
+      </span>
+      <span class="font-bold black text-lg">
+        {{ stepsData[activeIndex].header }}
+      </span>
+      <span class="font-normal black text-sm">* Information obligatoire </span>
+
+      <span
+        class="primary font-bold mt-4"
+        [ngClass]="activeIndex === 2 ? 'text-xl' : 'text-sm'"
+        >{{ stepsData[activeIndex].label }}</span
+      >
+
+      <app-offer
+        [ngClass]="activeIndex === 0 ? 'block' : 'hidden'"
+        [isEdit]="isEdit"
+        [annonce]="annonce"
+      />
+
+      <app-type-asset
+        [ngClass]="activeIndex === 1 ? 'block' : 'hidden'"
+        [isEdit]="isEdit"
+        [annonce]="annonce"
+      />
+
+      <app-general-informations
+        [ngClass]="activeIndex === 2 ? 'block' : 'hidden'"
+        [isEdit]="isEdit"
+        [annonce]="annonce"
+      />
+
+      <app-address
+        [ngClass]="activeIndex === 3 ? 'block' : 'hidden'"
+        [isEdit]="isEdit"
+        [annonce]="annonce"
+      />
+
+      <app-contact
+        [ngClass]="activeIndex === 4 ? 'block' : 'hidden'"
+        [isEdit]="isEdit"
+        [annonce]="annonce"
+      />
+
+      <app-characteristics
+        [ngClass]="activeIndex === 5 ? 'block' : 'hidden'"
+        [isEdit]="isEdit"
+        [annonce]="annonce"
+      />
+
+      <app-bilan-energitique
+        [ngClass]="activeIndex === 6 ? 'block' : 'hidden'"
+        [isEdit]="isEdit"
+        [annonce]="annonce"
+      />
+
+      <app-pictures
+        [ngClass]="activeIndex === 7 ? 'block' : 'hidden'"
+        [isEdit]="isEdit"
+        [annonce]="annonce"
+      />
+
+      <app-price
+        [ngClass]="activeIndex === 8 ? 'block' : 'hidden'"
+        [offerType]="annonce.typeOffre"
+        [user]="user"
+        [isEdit]="isEdit"
+        [annonce]="annonce"
+      />
+
+      <div class="flex gap-4 mt-10">
+        <button
+          pButton
+          label="Retour"
+          class="p-button-rounded bg-primary"
+          style="border: none"
+          (click)="back()"
+          [ngStyle]="{ visibility: activeIndex !== 0 ? 'visible' : 'hidden' }"
+          [disabled]="isLoading"
+        ></button>
+
+        <button
+          pButton
+          [label]="
+            activeIndex === stepsData.length - 1
+              ? isEdit
+                ? 'Modifier votre annonce'
+                : 'Créer votre annonce'
+              : 'Continuer'
+          "
+          class="p-button-rounded bg-accent"
+          style="border: none"
+          (click)="next()"
+          [loading]="isLoading"
+        ></button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,6 +8,8 @@ import { ControlErrorComponent } from './components/control-error/control-error.
 import { AnnonceCardComponent } from './components/annonce-card/annonce-card.component';
 import { MediaCardComponent } from './components/media-card/media-card.component';
 import { IconComponent } from './components/icon/icon.component';
+import { BilanComponent } from './components/bilan/bilan.component';
+import { StepperComponent } from './components/stepper/stepper.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,7 @@ import { IconComponent } from './components/icon/icon.component';
     ControlErrorComponent,
     AnnonceCardComponent,
     MediaCardComponent,
+    BilanComponent,
   ],
   imports: [
     CommonModule,
@@ -23,6 +26,7 @@ import { IconComponent } from './components/icon/icon.component';
     ReactiveFormsModule,
     RouterModule,
     IconComponent,
+    StepperComponent,
   ],
   exports: [
     PrimengModule,
@@ -35,6 +39,8 @@ import { IconComponent } from './components/icon/icon.component';
     AnnonceCardComponent,
     MediaCardComponent,
     IconComponent,
+    BilanComponent,
+    StepperComponent,
   ],
 })
 export class SharedModule {}

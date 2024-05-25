@@ -25,7 +25,8 @@ export class MediaCardComponent implements ControlValueAccessor {
   onTouched(): void {}
 
   writeValue(value: any): void {
-    this.value = value;
+    this.value = this.isNumber ? !!value : value;
+    this.number = value;
   }
 
   registerOnChange(fn: any): void {

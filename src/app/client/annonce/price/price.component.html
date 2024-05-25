@@ -1,0 +1,235 @@
+<ng-container [formGroup]="priceForm">
+  <div class="flex flex-col gap-4">
+    <ng-container formGroupName="informationsFinanciers">
+      <div class="flex-col flex gap-2">
+        <p-inputNumber
+          [showButtons]="true"
+          buttonLayout="horizontal"
+          inputId="montant"
+          spinnerMode="horizontal"
+          [step]="10"
+          decrementButtonClass="p-button-secondary"
+          incrementButtonClass="p-button-secondary"
+          [incrementButtonIcon]="PIcon.plus"
+          [decrementButtonIcon]="PIcon.minus"
+          mode="currency"
+          currency="EUR"
+          [min]="10"
+          formControlName="montant"
+          [useGrouping]="false"
+        ></p-inputNumber>
+        <control-error
+          [control]="priceForm.get('informationsFinanciers.montant')"
+        />
+      </div>
+
+      <div class="flex-col flex gap-2">
+        <span class="font-semibold text-sm">Charges de copropriété *</span>
+        <p-inputNumber
+          [showButtons]="true"
+          buttonLayout="horizontal"
+          inputId="chargesCopropriete"
+          spinnerMode="horizontal"
+          [step]="10"
+          decrementButtonClass="p-button-secondary"
+          incrementButtonClass="p-button-secondary"
+          [incrementButtonIcon]="PIcon.plus"
+          [decrementButtonIcon]="PIcon.minus"
+          mode="currency"
+          currency="EUR"
+          [min]="0"
+          formControlName="chargesCopropriete"
+          [useGrouping]="false"
+        ></p-inputNumber>
+        <control-error
+          [control]="priceForm.get('informationsFinanciers.chargesCopropriete')"
+        />
+      </div>
+
+      <div class="flex-col flex gap-2" *ngIf="offerType !== Offer.Vente">
+        <span class="font-semibold text-sm">Taxe foncière *</span>
+        <p-inputNumber
+          [showButtons]="true"
+          buttonLayout="horizontal"
+          inputId="taxeFonciere"
+          spinnerMode="horizontal"
+          [step]="10"
+          decrementButtonClass="p-button-secondary"
+          incrementButtonClass="p-button-secondary"
+          [incrementButtonIcon]="PIcon.plus"
+          [decrementButtonIcon]="PIcon.minus"
+          mode="currency"
+          currency="EUR"
+          [min]="0"
+          formControlName="taxeFonciere"
+          [useGrouping]="false"
+        ></p-inputNumber>
+        <control-error
+          [control]="priceForm.get('informationsFinanciers.taxeFonciere')"
+        />
+      </div>
+
+      <div class="flex-col flex gap-2" *ngIf="offerType !== Offer.Location">
+        <span class="font-semibold text-sm"
+          >Montant du dépôt de garantie *</span
+        >
+
+        <p-inputNumber
+          [showButtons]="true"
+          buttonLayout="horizontal"
+          inputId="depotDeGarantie"
+          spinnerMode="horizontal"
+          [step]="10"
+          decrementButtonClass="p-button-secondary"
+          incrementButtonClass="p-button-secondary"
+          [incrementButtonIcon]="PIcon.plus"
+          [decrementButtonIcon]="PIcon.minus"
+          mode="currency"
+          currency="EUR"
+          [min]="0"
+          formControlName="depotDeGarantie"
+          [useGrouping]="false"
+        ></p-inputNumber>
+        <control-error
+          [control]="priceForm.get('informationsFinanciers.depotDeGarantie')"
+        />
+      </div>
+
+      <div
+        class="flex-col flex gap-2"
+        *ngIf="Object.keys(mentionValues).includes(offerType)"
+      >
+        <span class="font-semibold text-sm">Mention *</span>
+        <p-dropdown
+          [options]="mentionValues[offerType]"
+          placeholder="Mention"
+          emptyFilterMessage="Aucun résultat trouvé"
+          emptyMessage="Aucun résultat trouvé"
+          [filter]="true"
+          [resetFilterOnHide]="true"
+          [showClear]="true"
+          class="w-full max-w-96"
+          styleClass="w-full"
+          formControlName="mention"
+        ></p-dropdown>
+        <control-error
+          [control]="priceForm.get('informationsFinanciers.mention')"
+        />
+      </div>
+
+      <div class="flex-col flex gap-2" *ngIf="false">
+        <span class="font-semibold text-sm">TVA *</span>
+        <p-inputNumber
+          [showButtons]="true"
+          buttonLayout="horizontal"
+          inputId="tva"
+          spinnerMode="horizontal"
+          [step]="0.1"
+          decrementButtonClass="p-button-secondary"
+          incrementButtonClass="p-button-secondary"
+          [incrementButtonIcon]="PIcon.plus"
+          [decrementButtonIcon]="PIcon.minus"
+          [min]="0"
+          [max]="100"
+          prefix="%"
+          formControlName="tva"
+        ></p-inputNumber>
+        <control-error [control]="priceForm.get('tva')" />
+      </div>
+    </ng-container>
+    <ng-container
+      formGroupName="honorairesAgence"
+      *ngIf="user.role === Role.Agence"
+    >
+      <span class="font-semibold text-lg">Honoraire de l'agence</span>
+
+      <div class="flex-col flex gap-2">
+        <span class="font-semibold text-sm">Charges de copropriété *</span>
+        <p-inputNumber
+          [showButtons]="true"
+          buttonLayout="horizontal"
+          inputId="montant"
+          spinnerMode="horizontal"
+          [step]="10"
+          decrementButtonClass="p-button-secondary"
+          incrementButtonClass="p-button-secondary"
+          [incrementButtonIcon]="PIcon.plus"
+          [decrementButtonIcon]="PIcon.minus"
+          mode="currency"
+          currency="EUR"
+          [min]="0"
+          formControlName="montant"
+          [useGrouping]="false"
+        ></p-inputNumber>
+        <control-error [control]="priceForm.get('honorairesAgence.montant')" />
+      </div>
+
+      <div class="flex-col flex gap-2">
+        <span class="font-semibold text-sm">Acquéreur *</span>
+        <p-inputNumber
+          [showButtons]="true"
+          buttonLayout="horizontal"
+          inputId="tva"
+          spinnerMode="horizontal"
+          [step]="1"
+          decrementButtonClass="p-button-secondary"
+          incrementButtonClass="p-button-secondary"
+          [incrementButtonIcon]="PIcon.plus"
+          [decrementButtonIcon]="PIcon.minus"
+          [min]="0"
+          [max]="100"
+          prefix="%"
+          formControlName="Acquereur"
+          (onInput)="onInputNumberChange($event, 'honorairesAgence.Vendeur')"
+        ></p-inputNumber>
+        <control-error
+          [control]="priceForm.get('honorairesAgence.Acquereur')"
+        />
+      </div>
+
+      <div class="flex-col flex gap-2">
+        <span class="font-semibold text-sm">Vendeur *</span>
+        <p-inputNumber
+          [showButtons]="true"
+          buttonLayout="horizontal"
+          inputId="tva"
+          spinnerMode="horizontal"
+          [step]="1"
+          decrementButtonClass="p-button-secondary"
+          incrementButtonClass="p-button-secondary"
+          [incrementButtonIcon]="PIcon.plus"
+          [decrementButtonIcon]="PIcon.minus"
+          [min]="0"
+          [max]="100"
+          prefix="%"
+          formControlName="Vendeur"
+          (onInput)="onInputNumberChange($event, 'honorairesAgence.Acquereur')"
+        ></p-inputNumber>
+        <control-error [control]="priceForm.get('honorairesAgence.Vendeur')" />
+      </div>
+
+      <div class="flex-col flex gap-2" *ngIf="offerType === Offer.Location">
+        <span class="font-semibold text-sm">Frais état lieu *</span>
+        <p-inputNumber
+          [showButtons]="true"
+          buttonLayout="horizontal"
+          inputId="fraisEtatLieu"
+          spinnerMode="horizontal"
+          [step]="10"
+          decrementButtonClass="p-button-secondary"
+          incrementButtonClass="p-button-secondary"
+          [incrementButtonIcon]="PIcon.plus"
+          [decrementButtonIcon]="PIcon.minus"
+          mode="currency"
+          currency="EUR"
+          [min]="0"
+          formControlName="fraisEtatLieu"
+          [useGrouping]="false"
+        ></p-inputNumber>
+        <control-error
+          [control]="priceForm.get('honorairesAgence.fraisEtatLieu')"
+        />
+      </div>
+    </ng-container>
+  </div>
+</ng-container>

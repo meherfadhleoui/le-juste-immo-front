@@ -1,0 +1,41 @@
+:host ::ng-deep {
+  .p-image-mask {
+    display: none;
+  }
+
+  .folder {
+    font-variation-settings: 'wght' 200;
+    font-size: 90px;
+  }
+
+  .p-galleria-item-wrapper {
+    width: 24rem;
+    height: 14rem;
+    * {
+      width: 24rem;
+      height: 14rem;
+    }
+  }
+
+  .p-galleria-thumbnail-wrapper {
+    height: 140px;
+    width: 24rem;
+
+    .p-galleria-thumbnail-items {
+      gap: 20px;
+    }
+
+    .p-galleria-thumbnail-item-content {
+      height: 100%;
+    }
+
+    .p-galleria-thumbnail-item * {
+      height: 100%;
+
+      img {
+        object-fit: fill;
+        height: 100px;
+      }
+    }
+  }
+}

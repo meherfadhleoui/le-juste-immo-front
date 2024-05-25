@@ -20,4 +20,16 @@ export class DataService {
       .get<FranceCity[]>('/nomenclature/villes')
       .pipe(catchError(() => EMPTY));
   }
+
+  getAssetTypes() {
+    return this.httpClient
+      .get<string[]>('/nomenclature/typeBien')
+      .pipe(catchError(() => EMPTY));
+  }
+
+  getEtats() {
+    return this.httpClient
+      .get<string[]>('/nomenclature/etat')
+      .pipe(catchError(() => EMPTY));
+  }
 }
