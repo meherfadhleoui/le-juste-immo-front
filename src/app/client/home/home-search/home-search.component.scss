@@ -40,7 +40,7 @@
 }
 
 .home-container {
-  min-height: 400px;
+  min-height: calc(100vh - 182px);
   background-image: url('/assets/search-background.jpg');
   background-size: cover;
   background-repeat: no-repeat;

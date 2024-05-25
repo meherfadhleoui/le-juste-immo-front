@@ -36,6 +36,7 @@ export class PriceComponent implements OnChanges {
     this.checkMentionControl();
     this.checkTaxeFonciereControl();
     this.checkDepotDeGarantie();
+    this.checkFraisEtatLieu();
 
     if (this.isEdit) {
       this.patchForm();
@@ -66,10 +67,7 @@ export class PriceComponent implements OnChanges {
       montant: new FormControl(null, Validators.required),
       Vendeur: new FormControl(null, Validators.required),
       Acquereur: new FormControl(null, Validators.required),
-      fraisEtatLieu: new FormControl(
-        null,
-        this.offerType === this.Offer.Location ? Validators.required : [],
-      ),
+      fraisEtatLieu: new FormControl(null),
     });
 
     this.priceForm.addControl('honorairesAgence', honorairesAgenceFormGroup);
@@ -84,6 +82,7 @@ export class PriceComponent implements OnChanges {
       mentionControl?.removeValidators(Validators.required);
     }
 
+    mentionControl?.patchValue(null);
     mentionControl?.updateValueAndValidity();
   }
 
@@ -98,6 +97,7 @@ export class PriceComponent implements OnChanges {
       taxeFonciereControl?.addValidators(Validators.required);
     }
 
+    taxeFonciereControl?.patchValue(null);
     taxeFonciereControl?.updateValueAndValidity();
   }
 
@@ -112,7 +112,21 @@ export class PriceComponent implements OnChanges {
       depotDeGarantie?.addValidators(Validators.required);
     }
 
+    depotDeGarantie?.patchValue(null);
     depotDeGarantie?.updateValueAndValidity();
+  }
+
+  checkFraisEtatLieu() {
+    const fraisEtatLieu = this.priceForm.get('honorairesAgence.fraisEtatLieu');
+
+    if (this.offerType === this.Offer.Location) {
+      fraisEtatLieu?.addValidators(Validators.required);
+    } else {
+      fraisEtatLieu?.removeValidators(Validators.required);
+    }
+
+    fraisEtatLieu?.patchValue(null);
+    fraisEtatLieu?.updateValueAndValidity();
   }
 
   onInputNumberChange(event: InputNumberInputEvent, controlName: string) {

@@ -44,6 +44,7 @@ export class HeaderComponent implements OnInit {
     this.menuItems = [
       {
         label: 'Annonces',
+        routerLink: ['/home'],
       },
       {
         label: 'Agences',

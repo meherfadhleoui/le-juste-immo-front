@@ -14,6 +14,10 @@ export const PROFILE_ROUTE: Route = {
         import('./informations/informations.component').then(
           (mod) => mod.InformationsComponent,
         ),
+
+      data: {
+        breadcrumbs: [{ label: 'Profile' }, { label: 'Mes informations' }],
+      },
     },
     {
       path: 'mes-annonces',
@@ -22,6 +26,10 @@ export const PROFILE_ROUTE: Route = {
         import('./mes-annonces/mes-annonces.component').then(
           (mod) => mod.MesAnnoncesComponent,
         ),
+
+      data: {
+        breadcrumbs: [{ label: 'Profile' }, { label: 'Mes annonces' }],
+      },
     },
     {
       path: 'security',
@@ -29,6 +37,10 @@ export const PROFILE_ROUTE: Route = {
         import('./security/security.component').then(
           (mod) => mod.SecurityComponent,
         ),
+
+      data: {
+        breadcrumbs: [{ label: 'Profile' }, { label: 'Securité' }],
+      },
     },
   ],
 };

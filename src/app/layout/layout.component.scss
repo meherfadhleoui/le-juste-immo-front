@@ -12,8 +12,16 @@
     z-index: 1000;
   }
 
-  .content {
-    margin-top: 70px;
+  ::ng-deep {
+    .p-breadcrumb {
+      border-radius: 0;
+      border: none;
+      background-color: #E9ECEF;
+      box-shadow: 0 2px 4px -1px var(--accent);
+      .p-menuitem-text {
+        color: var(--primary);
+      }
+    }
   }
 
   .footer {

@@ -19,6 +19,9 @@ const routes: Routes = [
           import('./client/home/home.component').then(
             (mod) => mod.HomeComponent,
           ),
+        data: {
+          breadcrumbs: [{ label: 'Acceuil' }],
+        },
       },
       PROFILE_ROUTE,
 
@@ -28,6 +31,9 @@ const routes: Routes = [
           import('./client/agency/agency.component').then(
             (mod) => mod.AgencyComponent,
           ),
+        data: {
+          breadcrumbs: [{ label: 'Agences' }],
+        },
       },
 
       {
@@ -36,6 +42,10 @@ const routes: Routes = [
           import('./client/annonce-viewer/annonce-viewer.component').then(
             (mod) => mod.AnnonceViewerComponent,
           ),
+
+        data: {
+          breadcrumbs: [{ label: 'Annonce' }, { label: 'Consultation' }],
+        },
       },
     ],
   },

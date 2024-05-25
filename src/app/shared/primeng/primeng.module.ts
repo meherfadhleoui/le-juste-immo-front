@@ -24,6 +24,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MessagesModule } from 'primeng/messages';
 import { CalendarModule } from 'primeng/calendar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 
 @NgModule({
   exports: [
@@ -52,6 +53,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     MessagesModule,
     CalendarModule,
     ConfirmDialogModule,
+    BreadcrumbModule,
   ],
 })
 export class PrimengModule {}

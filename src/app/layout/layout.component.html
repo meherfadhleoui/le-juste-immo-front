@@ -1,3 +1,7 @@
-<app-header class="header"></app-header>
-<router-outlet class="content"></router-outlet>
+<div class="header">
+  <app-header></app-header>
+  <p-breadcrumb [model]="items" [home]="home" />
+</div>
+
+<router-outlet class="mt-28"></router-outlet>
 <app-footer class="footer"></app-footer>
