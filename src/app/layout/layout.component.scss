@@ -15,12 +15,8 @@
   ::ng-deep {
     .p-breadcrumb {
       border-radius: 0;
-      border: none;
-      background-color: #E9ECEF;
+      border-width: 0.1px 0px 0px 0px;
       box-shadow: 0 2px 4px -1px var(--accent);
-      .p-menuitem-text {
-        color: var(--primary);
-      }
     }
   }
 

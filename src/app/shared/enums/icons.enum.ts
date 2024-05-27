@@ -42,4 +42,5 @@ export enum PIcon {
   sign_out = 'pi pi-sign-out',
   sign_in = 'pi pi-sign-in',
   user_plus = 'pi pi-user-plus',
+  mail = 'pi pi-envelope',
 }

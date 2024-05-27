@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DpeState } from 'src/app/shared/enums/dpe-state.enum';
-import { GIcon } from 'src/app/shared/enums/icons.enum';
+import { GIcon, PIcon } from 'src/app/shared/enums/icons.enum';
 import { Annonce } from 'src/app/shared/models/annonce.model';
 import { AnnonceService } from 'src/app/shared/services/annonce.service';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -17,6 +17,7 @@ export class AnnonceViewerComponent implements OnInit {
   annonce?: Annonce;
   annonceId = '';
   GIcon = GIcon;
+  PIcon = PIcon;
   DpeState = DpeState;
 
   showImages: boolean = false;
