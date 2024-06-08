@@ -69,7 +69,7 @@
         />
       </div>
 
-      <div class="flex-col flex gap-2" *ngIf="offerType !== Offer.Location">
+      <div class="flex-col flex gap-2" *ngIf="offerType === Offer.Location">
         <span class="font-semibold text-sm"
           >Montant du dépôt de garantie *</span
         >
@@ -115,26 +115,6 @@
         <control-error
           [control]="priceForm.get('informationsFinanciers.mention')"
         />
-      </div>
-
-      <div class="flex-col flex gap-2" *ngIf="false">
-        <span class="font-semibold text-sm">TVA *</span>
-        <p-inputNumber
-          [showButtons]="true"
-          buttonLayout="horizontal"
-          inputId="tva"
-          spinnerMode="horizontal"
-          [step]="0.1"
-          decrementButtonClass="p-button-secondary"
-          incrementButtonClass="p-button-secondary"
-          [incrementButtonIcon]="PIcon.plus"
-          [decrementButtonIcon]="PIcon.minus"
-          [min]="0"
-          [max]="100"
-          prefix="%"
-          formControlName="tva"
-        ></p-inputNumber>
-        <control-error [control]="priceForm.get('tva')" />
       </div>
     </ng-container>
     <ng-container

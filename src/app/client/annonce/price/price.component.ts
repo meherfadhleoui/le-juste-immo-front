@@ -37,10 +37,7 @@ export class PriceComponent implements OnChanges {
     this.checkTaxeFonciereControl();
     this.checkDepotDeGarantie();
     this.checkFraisEtatLieu();
-
-    if (this.isEdit) {
-      this.patchForm();
-    }
+    this.patchForm();
   }
 
   patchForm() {
@@ -107,9 +104,9 @@ export class PriceComponent implements OnChanges {
     );
 
     if (this.offerType === this.Offer.Location) {
-      depotDeGarantie?.removeValidators(Validators.required);
-    } else {
       depotDeGarantie?.addValidators(Validators.required);
+    } else {
+      depotDeGarantie?.removeValidators(Validators.required);
     }
 
     depotDeGarantie?.patchValue(null);

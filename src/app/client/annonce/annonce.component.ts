@@ -301,7 +301,6 @@ export class CreateAnnonceComponent implements OnInit {
     this._annonceService.update(this.annonce._id, annonce).subscribe({
       next: (res) => {
         this._toastService.success(res.message);
-        this.isLoading = false;
         this.router.navigate([`annonce/${this.annonce._id}`]);
       },
       error: () => {
