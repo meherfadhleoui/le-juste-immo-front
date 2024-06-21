@@ -136,6 +136,73 @@
         <bilan [value]="annonce.dpe.emissionsGaz" [isDEP]="false"></bilan>
       </div>
     </div>
+
+    <p-divider />
+
+    <div class="flex flex-col gap-2" style="max-width: 600px">
+      <span class="font-semibold text-3xl mb-4">À propos du prix</span>
+      <div class="font-semibold text-xl flex justify-between">
+        Détails du prix
+        <span> {{ annonce.informationsFinanciers.mention }} </span>
+      </div>
+
+      <div class="flex justify-between">
+        <span>Prix</span>
+        <span> {{ annonce.informationsFinanciers.montant }} &#8364; </span>
+      </div>
+
+      <div class="flex justify-between">
+        <span>Charges de copropriété</span>
+        <span>
+          {{ annonce.informationsFinanciers.chargesCopropriete }} &#8364;
+        </span>
+      </div>
+
+      <div
+        class="flex justify-between"
+        *ngIf="annonce.typeOffre === Offer.Vente"
+      >
+        <span>Taxe foncière</span>
+        <span> {{ annonce.informationsFinanciers.taxeFonciere }} &#8364; </span>
+      </div>
+
+      <div
+        class="flex justify-between"
+        *ngIf="annonce.typeOffre === Offer.Location"
+      >
+        <span>Montant du dépôt de garantie</span>
+        <span>
+          {{ annonce.informationsFinanciers.depotDeGarantie }} &#8364;
+        </span>
+      </div>
+
+      <ng-container *ngIf="annonce.annonceur?.role === Role.Agence">
+        <div class="font-semibold text-xl mt-4">Honoraire de l'agence</div>
+
+        <div class="flex justify-between">
+          <span>Charges de copropriété</span>
+          <span> {{ annonce.honorairesAgence.montant }} &#8364;</span>
+        </div>
+
+        <div class="flex justify-between">
+          <span>Acquéreur</span>
+          <span> {{ annonce.honorairesAgence.Acquereur }}% </span>
+        </div>
+
+        <div class="flex justify-between">
+          <span>Vendeur</span>
+          <span> {{ annonce.honorairesAgence.Vendeur }}% </span>
+        </div>
+
+        <div
+          class="flex justify-between"
+          *ngIf="annonce.typeOffre === Offer.Location"
+        >
+          <span>Frais état lieu</span>
+          <span> {{ annonce.honorairesAgence.fraisEtatLieu }} &#8364; </span>
+        </div>
+      </ng-container>
+    </div>
   </div>
 
   <!-- Info annonceur -->

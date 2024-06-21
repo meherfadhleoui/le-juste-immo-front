@@ -46,7 +46,7 @@
         />
       </div>
 
-      <div class="flex-col flex gap-2" *ngIf="offerType !== Offer.Vente">
+      <div class="flex-col flex gap-2" *ngIf="offerType === Offer.Vente">
         <span class="font-semibold text-sm">Taxe foncière *</span>
         <p-inputNumber
           [showButtons]="true"

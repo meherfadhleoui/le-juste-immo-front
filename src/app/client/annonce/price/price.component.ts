@@ -89,9 +89,9 @@ export class PriceComponent implements OnChanges {
     );
 
     if (this.offerType === this.Offer.Vente) {
-      taxeFonciereControl?.removeValidators(Validators.required);
-    } else {
       taxeFonciereControl?.addValidators(Validators.required);
+    } else {
+      taxeFonciereControl?.removeValidators(Validators.required);
     }
 
     taxeFonciereControl?.patchValue(null);

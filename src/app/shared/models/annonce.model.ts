@@ -1,3 +1,4 @@
+import { Offer } from '../enums/offer.enum';
 import { User } from './user.models';
 
 export interface Annonce {
@@ -8,7 +9,7 @@ export interface Annonce {
   detailsVenteViager: DetailsVenteViager;
   titre: string;
   reference: string;
-  typeOffre: string;
+  typeOffre: Offer;
   typeBien: string;
   principlePhoto: string;
   photos: string[];
@@ -72,7 +73,7 @@ export interface InformationsFinanciers {
 
 export interface HonorairesAgence {
   montant: number;
-  Acquéreur: number;
+  Acquereur: number;
   Vendeur: number;
   fraisEtatLieu?: number;
 }
